@@ -8,245 +8,190 @@
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
-html, body{
-  margin:0; padding:0; height:100%;
-  overflow-x:hidden;
-  font-family:Arial,sans-serif;
+html, body{ margin:0; padding:0; height:100%; overflow-x:hidden; font-family:Arial,sans-serif; }
+body{ background: linear-gradient(-45deg,#ffe0f0,#f0dfff,#e0f0ff,#fff0e0); background-size:400% 400%; animation: gradientBG 20s ease infinite; display:flex; justify-content:center; align-items:center; }
+@keyframes gradientBG { 0%{background-position:0% 50%;} 50%{background-position:100% 50%;} 100%{background-position:0% 50%;} }
+
+.container{ padding:25px; max-width:600px; width:90%; border-radius:25px; backdrop-filter:blur(15px); background:rgba(255,255,255,0.15); box-shadow:0 0 50px rgba(200,105,180,0.4); text-align:center; transition:transform 0.3s ease; }
+@keyframes fadeIn{
+  0%{opacity:0; transform:scale(0.9);}
+  100%{opacity:1; transform:scale(1);}
 }
 
-body{
-  background: linear-gradient(-45deg,#ffe0f0,#f0dfff,#e0f0ff,#fff0e0);
-  background-size:400% 400%;
-  animation: gradientBG 20s ease infinite;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-@keyframes gradientBG {
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
-
-.container{
-  padding:25px;
-  max-width:600px;
-  width:90%;
-  border-radius:25px;
-  backdrop-filter:blur(15px);
-  background:rgba(255,255,255,0.15);
-  box-shadow:0 0 50px rgba(200,105,180,0.4);
-  text-align:center;
-}
-
-/* 🔥 STARTING FADE IN */
 #questionSection{
   opacity:0;
-  animation: fadeIn 2s forwards;
+  animation: fadeIn 1.5s forwards;
 }
-
-@keyframes fadeIn{
-  from{opacity:0; transform:scale(0.95);}
-  to{opacity:1; transform:scale(1);}
-}
-
-h1,h2,p{
-  font-family:'Dancing Script', cursive;
-  color:#333;
-  text-shadow:0 0 10px #aaa;
-}
-
-button{
-  padding:12px 25px;
-  font-size:18px;
-  margin:10px;
-  border:none;
-  border-radius:15px;
-  cursor:pointer;
-  background:linear-gradient(145deg,#fff,#ffe0f0);
-  box-shadow:0 0 15px rgba(0,0,0,0.2);
-  transition:0.3s;
-}
-
+h1,h2,p{ font-family:'Dancing Script', cursive; color:#333; text-shadow:0 0 10px #aaa; }
+button{ padding:12px 25px; font-size:18px; margin:10px; border:none; border-radius:15px; cursor:pointer; background:linear-gradient(145deg,#fff,#ffe0f0); box-shadow:0 0 15px rgba(0,0,0,0.2); transition:all 0.3s ease, transform 0.3s ease; }
 button:hover{ transform:scale(1.1); }
-
-#yes{ background:#ff77aa; color:white; }
-#no{ background:#ff4466; color:white; position:relative; }
+#yes{ background:#ff77aa; color:white; } #no{ background:#ff4466; color:white; position:relative; }
 
 #loveSection{ display:none; margin-top:20px; }
+#photo{ width:100%; border-radius:20px; margin-top:20px; transition:opacity 1.5s ease-in-out, transform 1.5s ease-in-out; opacity:1; box-shadow:0 0 50px rgba(200,105,180,0.5); }
 
-#photo{
-  width:100%;
-  border-radius:20px;
-  margin-top:20px;
-  transition:opacity 1.5s ease, transform 1.5s ease;
-  box-shadow:0 0 50px rgba(200,105,180,0.5);
-}
+#questions{ margin-top:20px; display:none; text-align:center; font-family:'Pacifico',cursive;}
+#questions h2{ color:#333; font-size:22px; text-shadow:0 0 6px #aaa; }
+#questions button{ width:80%; display:block; margin:10px auto; border-radius:15px; font-size:20px; background:linear-gradient(145deg,#ffe0f0,#ffd1ff); box-shadow:0 0 10px rgba(0,0,0,0.2); color:#333; }
+#questions button:hover{ transform:scale(1.05); }
 
-#questions{
-  margin-top:20px;
-  display:none;
-  font-family:'Pacifico',cursive;
-}
+#celebration{ display:none; font-size:28px; color:#ff6699; margin-top:20px; animation:pulse 1.5s infinite; }
+@keyframes pulse{0%{transform:scale(1); text-shadow:0 0 5px #ff77aa;}50%{transform:scale(1.1); text-shadow:0 0 15px #ffb6c1;}100%{transform:scale(1); text-shadow:0 0 5px #ff77aa;}}
 
-#questions button{
-  width:80%;
-  margin:10px auto;
-  font-size:20px;
-}
+.falling-flower{ position:fixed; top:-20px; font-size:25px; animation:fall linear forwards; pointer-events:none; z-index:9999; }
+@keyframes fall{0%{transform:translateY(-20px) rotate(0deg) scale(0.8); opacity:0.5;}100%{transform:translateY(100vh) rotate(360deg) scale(1); opacity:0;}}
 
-/* 🌸 FLOWERS AFTER QUIZ */
-.falling-flower{
-  position:fixed;
-  top:-30px;
-  font-size:26px;
-  animation: fall 6s linear forwards;
-  pointer-events:none;
-  z-index:9999;
-}
+.floating-heart{ position:fixed; font-size:18px; animation:floatUp linear infinite; pointer-events:none; z-index:9998; user-select:none;}
+@keyframes floatUp{0%{transform:translateY(100vh) scale(0.5) rotate(0deg);}100%{transform:translateY(-50px) scale(1) rotate(360deg) opacity:0;}}
 
-@keyframes fall{
-  to{ transform:translateY(110vh) rotate(360deg); opacity:0; }
-}
+.sparkle{ position:fixed; font-size:12px; animation:sparkleAnim 2s linear infinite; pointer-events:none; z-index:9999;}
+@keyframes sparkleAnim{0%{opacity:1;}50%{opacity:0.3;}100%{opacity:1;}}
 
-/* 🧿 NAZAR */
-#nazar{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:40px;
-  display:none;
-  animation:nazarFade 2s ease forwards;
-  z-index:9999;
-}
-
-@keyframes nazarFade{
-  from{opacity:0; transform:translateX(-50%) scale(0.8);}
-  to{opacity:1; transform:translateX(-50%) scale(1);}
-}
+#toast{ position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#ff4466; color:white; padding:12px 20px; border-radius:15px; z-index:9999; font-size:16px; opacity:0; transition:opacity 0.3s ease; }
 </style>
 </head>
-
 <body>
 
 <div class="container" id="questionSection">
-  <h1>Hello Ziyu❤️</h1>
-  <p>
-    Tum mere ho<br>
-    Mai tumhare bina ek pal bhi nahi sakta<br>
-    Tum mera sab kuch ho<br>
-    Will you marry me Ziyu!
-  </p>
-  <button id="yes" onclick="sayYes()">YES 💍</button>
-  <button id="no" onclick="moveNo()">NO 😅</button>
+<h1>Hello Ziyu❤️</h1>
+<p>Tum mere ho<br>Mai tumhare bina ek pal bhi nahi sakta<br>Tum Mera sab kuch ho<br>Will you marry me Ziyu!</p>
+<button id="yes" onclick="sayYes()">YES 💍</button>
+<button id="no" onclick="moveNo()">NO 😅</button>
 </div>
 
 <div class="container" id="loveSection">
-  <audio id="song" src="song.mp3"></audio>
-  <img id="photo" src="photo1.jpg">
-  <div id="questions"></div>
-
-  <video id="endVideo" style="display:none; width:100%; aspect-ratio:9/16; border-radius:15px;" controls autoplay muted>
-    <source src="video.mp4" type="video/mp4">
-  </video>
+<audio id="song" src="song.mp3" preload="auto"></audio>
+<img id="photo" src="photo1.jpg" alt="Photo">
+<div id="questions"></div>
+<div id="celebration">🥳 Tum mere ho baby ji 💕</div>
+<video id="endVideo" width="100%" style="aspect-ratio:9/16; display:none; border-radius:15px; margin-top:20px;" controls autoplay muted playsinline>
+<source src="video.mp4" type="video/mp4">
+</video>
 </div>
 
-<div id="nazar">🧿</div>
+<div id="toast">Maar khati kamini 👊</div>
 
 <script>
-const photos=[
-"photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg","photo5.jpg",
-"photo6.jpg","photo7.jpg","photo8.jpg","photo9.jpg","photo10.jpg","photo11.jpg"
-];
-
+const photos=["photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg","photo5.jpg","photo6.jpg","photo7.jpg","photo8.jpg","photo9.jpg","photo10.jpg","photo11.jpg"];
+let currentQ=0;
 const quiz=[
-{q:"Tum kiske ho?",o:["Tumhari ❤️","Jo le gaya","Kya pata","Kis ki bhi nahi"],c:0},
-{q:"Azeem kon hai tumhara?",o:["Sab kuch 💕","Kuch bhi nahi","Toy","Diwana"],c:0},
-{q:"Tum Azeem ko kitna piyar karte ho?",o:["Jaan se zyada 😘","Thoda sa","Nahi","Kon Azeem"],c:0},
-{q:"Tumhara favourite color?",o:["White","Blue","Red","Green"],c:0}
+{q:"Tum kiske ho?", options:["Tumhari ❤️","Jo le gaya","Kya pata","Kis ki bhi nahi"], correct:0},
+{q:"Azeem kon hai tumhara?", options:["Sab kuch 💕","kuch b nahi","Toy","Diwana"], correct:0},
+{q:"Tum Azeem ko kitna piyar karte ho?", options:["Jaan se zyada 😘","Thoda sa 🥲","Nahi karti 😏","Kon Azeem 😂"], correct:0},
+{q:"Tumhara favorite color?", options:["White 🤍","Blue 💙","Red ❤️","Green 💚"], correct:0}
 ];
 
-let q=0;
-
-function sayYes(){
-  document.getElementById("questionSection").style.display="none";
-  document.getElementById("loveSection").style.display="block";
-  document.getElementById("song").play();
-  showQ();
+function showQuestion(qIndex){
+currentQ=qIndex;
+const qDiv=document.getElementById("questions");
+qDiv.innerHTML="";
+const h=document.createElement("h2"); h.textContent=quiz[qIndex].q; qDiv.appendChild(h);
+quiz[qIndex].options.forEach((opt,i)=>{
+let btn=document.createElement("button"); btn.textContent=opt; btn.onclick=()=>checkAnswer(i,btn); qDiv.appendChild(btn);
+});
+qDiv.style.display="block"; fadePhoto(qIndex);
 }
 
-function showQ(){
-  const box=document.getElementById("questions");
-  box.innerHTML="<h2>"+quiz[q].q+"</h2>";
-  quiz[q].o.forEach((t,i)=>{
-    const b=document.createElement("button");
-    b.innerText=t;
-    b.onclick=()=>check(i);
-    box.appendChild(b);
-  });
-  box.style.display="block";
-  showPhoto(q);
+function fadePhoto(index){
+const photo=document.getElementById("photo");
+photo.style.opacity=0;
+photo.style.transform="scale(0.95)";
+setTimeout(()=>{ if(index<photos.length){ photo.src=photos[index]; photo.style.opacity=1; photo.style.transform="scale(1)"; } },500);
 }
 
-function showPhoto(i){
-  const p=document.getElementById("photo");
-  p.style.opacity=0;
-  setTimeout(()=>{
-    p.src=photos[i];
-    p.style.opacity=1;
-  },500);
+function checkAnswer(selected,btn){
+if(selected===quiz[currentQ].correct){
+btn.classList.add("correct"); miniConfetti();
+let nextQ=currentQ+1;
+setTimeout(()=>{ btn.classList.remove("correct");
+if(nextQ<quiz.length){ showQuestion(nextQ); } else{ document.getElementById("questions").style.display="none"; showExtraPhotos(quiz.length); celebrate(); } },900);
+}else{ btn.classList.add("wrong"); showToast(); setTimeout(()=>btn.classList.remove("wrong"),500); }
 }
 
-function check(i){
-  if(i===quiz[q].c){
-    q++;
-    if(q<quiz.length){
-      showQ();
-    }else{
-      document.getElementById("questions").style.display="none";
-      showPhotosAfterQuiz();
-      startFlowers();
-    }
-  }
+function showToast(){
+const toast=document.getElementById("toast");
+toast.style.opacity=1;
+if(navigator.vibrate){ navigator.vibrate(200); }
+setTimeout(()=>{ toast.style.opacity=0; },1500);
 }
 
-function showPhotosAfterQuiz(){
-  let i=quiz.length;
-  const p=document.getElementById("photo");
-  const int=setInterval(()=>{
-    if(i<photos.length){
-      p.style.opacity=0;
-      setTimeout(()=>{p.src=photos[i]; p.style.opacity=1;},500);
-      i++;
-    }else{
-      clearInterval(int);
-      showVideo();
-    }
-  },2500);
+function showExtraPhotos(startIndex){
+let idx=startIndex; const photo=document.getElementById("photo");
+const interval=setInterval(()=>{
+photo.style.opacity=0; photo.style.transform="scale(0.95)";
+setTimeout(()=>{
+if(idx<photos.length){ photo.src=photos[idx]; photo.style.opacity=1; photo.style.transform="scale(1)"; idx++; } 
+else { clearInterval(interval); showVideo(); window.scrollTo({top:document.body.scrollHeight, behavior:"smooth"}); }
+},500);
+},2500);
 }
 
-function showVideo(){
-  document.getElementById("endVideo").style.display="block";
-  document.getElementById("nazar").style.display="block";
+function celebrate(){
+const celebration=document.getElementById("celebration");
+celebration.style.display="block";
+
+setInterval(()=>{
+const flower=document.createElement("div");
+flower.className="falling-flower";
+flower.style.left=Math.random()*100+"vw";
+flower.style.animationDuration=6+Math.random()*4+"s";
+flower.textContent="🌸";
+document.body.appendChild(flower);
+setTimeout(()=>flower.remove(),10000);
+},400);
+
+setInterval(()=>{
+const heart=document.createElement("div");
+heart.className="floating-heart";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=15+Math.random()*20+"px";
+heart.textContent=" ";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),6000);
+},500);
+
+setInterval(()=>{
+const sparkle=document.createElement("div");
+sparkle.className="sparkle";
+sparkle.style.left=Math.random()*100+"vw";
+sparkle.style.top=Math.random()*100+"vh";
+sparkle.textContent="✨";
+sparkle.style.fontSize=10+Math.random()*10+"px";
+document.body.appendChild(sparkle);
+setTimeout(()=>sparkle.remove(),2500);
+},400);
+
+miniConfetti();
 }
 
-function startFlowers(){
-  setInterval(()=>{
-    const f=document.createElement("div");
-    f.className="falling-flower";
-    f.innerText="🌸";
-    f.style.left=Math.random()*100+"vw";
-    document.body.appendChild(f);
-    setTimeout(()=>f.remove(),7000);
-  },400);
+function miniConfetti(){
+for(let i=0;i<25;i++){
+let conf=document.createElement("div");
+conf.className="sparkle";
+conf.textContent="💕";
+conf.style.left=Math.random()*100+"vw";
+conf.style.top=Math.random()*100+"vh";
+conf.style.fontSize=15+Math.random()*20+"px";
+document.body.appendChild(conf);
+setTimeout(()=>conf.remove(),2500);
+}
 }
 
-function moveNo(){
-  const b=document.getElementById("no");
-  b.style.transform=`translate(${Math.random()*200-100}px,${Math.random()*200-100}px)`;
+function moveNo(){ 
+    const noBtn=document.getElementById("no"); 
+    const x=Math.random()*200-100; 
+    const y=Math.random()*200-100; 
+    noBtn.style.transform=`translate(${x}px,${y}px)`; 
 }
+
+function sayYes(){ 
+    document.getElementById("questionSection").style.display="none"; 
+    document.getElementById("loveSection").style.display="block"; 
+    const song=document.getElementById("song"); song.loop=true; song.volume=0.6; song.play(); 
+    showQuestion(0); 
+}
+
+function showVideo(){ document.getElementById("endVideo").style.display="block"; }
 </script>
 
 </body>
