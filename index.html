@@ -9,8 +9,16 @@
     <style>
         :root { --primary-pink: #ff4d6d; --glass: rgba(255, 255, 255, 0.25); --glass-border: rgba(255, 255, 255, 0.5); }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
         body { margin: 0; padding: 0; min-height: 100vh; width: 100vw; background: linear-gradient(-45deg, #ffe0f0, #f0dfff, #e0f0ff, #fff0e0); background-size: 400% 400%; animation: gradientBG 15s ease infinite; display: flex; justify-content: center; align-items: center; font-family: 'Poppins', sans-serif; overflow-x: hidden; transition: opacity 2s ease; }
         @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+        /* Smooth Fade-In for Intro */
+        .fade-in-entry { animation: fadeInScale 1.5s ease-out forwards; }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
 
         .container { position: relative; z-index: 50; padding: 20px; width: 92%; max-width: 420px; background: var(--glass); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-radius: 30px; border: 1px solid var(--glass-border); box-shadow: 0 15px 35px rgba(0,0,0,0.1); text-align: center; margin: 20px auto; }
         .photo-container { width: 85%; aspect-ratio: 9/16; margin: 15px auto; border-radius: 20px; overflow: hidden; border: 4px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.15); background: #000; position: relative; z-index: 60; }
@@ -22,7 +30,6 @@
         h1 { font-family: 'Dancing Script', cursive; color: #d6336c; font-size: 2.5rem; margin: 0; }
         .main-p { font-family: 'Pacifico', cursive; color: #444; font-size: 1.1rem; line-height: 1.5; margin: 15px 0; }
         
-        /* Grid Layout for Buttons */
         #quizContainer { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
         #quizContainer h2 { grid-column: span 2; font-family: 'Dancing Script', cursive; margin-bottom: 5px; color: #333; }
 
@@ -35,6 +42,13 @@
         .correct { background: #2ed573 !important; color: white; }
         .wrong { background: #ff4757 !important; color: white; animation: shake 0.4s; }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+
+        /* Floating background elements */
+        .bg-float { position: fixed; pointer-events: none; z-index: 5; animation: floatUp linear infinite; opacity: 0.4; color: #ff85a1; }
+        @keyframes floatUp {
+            from { transform: translateY(105vh) scale(1); opacity: 0.4; }
+            to { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
 
         .decoration-bg { position: fixed; pointer-events: none; z-index: 1; animation: fall linear forwards; opacity: 0.6; }
         .decoration-fg { position: fixed; pointer-events: none; z-index: 1000; animation: fall linear forwards; opacity: 0.3; }
@@ -54,9 +68,9 @@
         #endVideo { width: 100%; aspect-ratio: 9/16; border-radius: 15px; display: none; object-fit: cover; position: relative; z-index: 70; }
     </style>
 </head>
-<body>
+<body onload="initFloatingBG()">
     <div id="cornerNazar">🧿</div>
-    <div class="container" id="introBox">
+    <div class="container fade-in-entry" id="introBox">
         <h1>Hello Ziyu ❤️</h1>
         <p class="main-p">Tum meri ho mai<br>tumhare bina ek pal bhi nahi rahe sakta<br>Tum meri duniya hi<br>Will you marry me ziyu !</p>
         <div class="btn-wrapper"><button id="yes" onclick="startApp()">YES 💍</button><button id="no" onmouseover="moveNo()" onclick="moveNo()">NO 😅</button></div>
@@ -72,6 +86,27 @@
     <div id="finalMessage"><span id="finalNazar">🧿</span><h2>Thanks for coming in my life Ziyu 🥹</h2></div>
     <div id="heartPop">💕</div><div id="toast">Maar khati kamini 👊</div>
         <script>
+        // Pehle page ke liye background floating hearts
+        function initFloatingBG() {
+            for(let i=0; i<15; i++) {
+                createFloatHeart();
+            }
+        }
+
+        function createFloatHeart() {
+            const h = document.createElement("div");
+            h.className = "bg-float";
+            h.innerText = Math.random() > 0.5 ? "❤️" : "💖";
+            h.style.left = Math.random() * 100 + "vw";
+            h.style.fontSize = (Math.random() * 20 + 10) + "px";
+            h.style.animationDuration = (Math.random() * 5 + 5) + "s";
+            h.style.animationDelay = (Math.random() * 5) + "s";
+            document.body.appendChild(h);
+            h.addEventListener('animationiteration', () => {
+                h.style.left = Math.random() * 100 + "vw";
+            });
+        }
+
         const photos = ["photo1.jpg", "photo2.jpg", "photo3.jpg", "photo4.jpg", "photo5.jpg", "photo6.jpg", "photo7.jpg", "photo8.jpg", "photo9.jpg", "photo10.jpg", "photo11.jpg", "photo12.jpg", "photo13.jpg", "photo14.jpg", "photo15.jpg"];
         const questions = [
             { q: "Tum kiske ho?", a: ["Tumhari ❤️", "Jo le gaya", "Kya pata", "Kis ki bhi nahi"], c: "Tumhari ❤️" },
@@ -81,7 +116,16 @@
         ];
         let qStep = 0;
         function moveNo() { const b = document.getElementById("no"); b.style.position = 'fixed'; b.style.left = Math.random() * (window.innerWidth - 100) + 'px'; b.style.top = Math.random() * (window.innerHeight - 50) + 'px'; }
-        function startApp() { document.getElementById("introBox").style.display = "none"; document.getElementById("mainBox").style.display = "block"; document.getElementById("mainAudio").play().catch(() => {}); renderQuiz(0); }
+        
+        function startApp() { 
+            // Purane floating hearts hata do jab main app shuru ho
+            const oldHearts = document.querySelectorAll('.bg-float');
+            oldHearts.forEach(h => h.remove());
+            document.getElementById("introBox").style.display = "none"; 
+            document.getElementById("mainBox").style.display = "block"; 
+            document.getElementById("mainAudio").play().catch(() => {}); 
+            renderQuiz(0); 
+        }
         
         function renderQuiz(idx) {
             qStep = idx; const container = document.getElementById("quizContainer");
