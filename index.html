@@ -12,8 +12,8 @@
 body{
   margin:0; padding:0; font-family:Arial,sans-serif; text-align:center;
   overflow-x:hidden; position:relative;
-  background: linear-gradient(-45deg, #ffe0f0, #f0dfff, #e0f0ff, #fff0e0);
-  background-size: 400% 400%; animation: gradientBG 20s ease infinite;
+  background: linear-gradient(-45deg,#ffe0f0,#f0dfff,#e0f0ff,#fff0e0);
+  background-size:400% 400%; animation: gradientBG 20s ease infinite;
 }
 @keyframes gradientBG {
   0%{background-position:0% 50%;}
@@ -22,17 +22,17 @@ body{
 }
 
 .container{
-  padding:20px; max-width:600px; margin:auto; 
-  background: rgba(255,255,255,0.1); 
-  backdrop-filter: blur(15px); border-radius:20px; 
-  box-shadow: 0 0 40px rgba(200,105,180,0.4); transition: transform 0.3s ease;
+  padding:25px; max-width:600px; margin:auto; 
+  background: rgba(255,255,255,0.15); 
+  backdrop-filter: blur(15px); border-radius:25px; 
+  box-shadow:0 0 50px rgba(200,105,180,0.4); transition: transform 0.3s ease;
 }
 
-h1, p{
+h1,h2,p{
   font-family: 'Dancing Script', cursive;
-  opacity:0; transform: scale(0.95);
-  transition: opacity 2s ease, transform 2s ease;
   color:#333; text-shadow:0 0 10px #aaa;
+  opacity:0; transform:scale(0.95);
+  transition: opacity 2s ease, transform 2s ease;
 }
 body.loaded h1, body.loaded p{ opacity:1; transform:scale(1); }
 
@@ -55,11 +55,15 @@ button.wrong{ box-shadow:0 0 25px #dc3545; }
 #no{ background:#ff4466; color:white; position:relative; transition: transform 0.6s cubic-bezier(0.68,-0.55,0.27,1.55); }
 
 #loveSection{ display:none; margin-top:20px; }
-#photo{ width:100%; max-width:600px; border-radius:15px; margin-top:20px; transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out; opacity:1; box-shadow:0 0 40px rgba(200,105,180,0.5); }
+#photo{ width:100%; max-width:600px; border-radius:20px; margin-top:20px; transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out; opacity:1; box-shadow:0 0 50px rgba(200,105,180,0.5); }
 
 #questions{ margin-top:20px; display:none; text-align:center; font-family:'Pacifico',cursive;}
 #questions h2{ color:#333; font-size:22px; text-shadow:0 0 6px #aaa; }
-#questions button{ width:80%; display:block; margin:10px auto; background:#fff; border-radius:15px; font-size:20px; }
+#questions button{
+  width:80%; display:block; margin:10px auto; border-radius:15px; font-size:20px; background:linear-gradient(145deg,#ffe0f0,#ffd1ff); 
+  box-shadow:0 0 10px rgba(0,0,0,0.2);
+  color:#333;
+}
 #questions button:hover{ transform:scale(1.05); }
 
 #celebration{
@@ -85,17 +89,18 @@ button.wrong{ box-shadow:0 0 25px #dc3545; }
   position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
   background:#ff4466; color:white; padding:12px 20px; border-radius:15px; z-index:9999; font-size:16px; opacity:0; transition:opacity 0.3s ease;
 }
+
 </style>
 </head>
 <body>
 
 <div class="container" id="questionSection">
-<h1>Hello Ziya 💕</h1>
+<h1>Hello Ziyu❤️</h1>
 <p>
-Tum meri ho.<br>
-Main tumhare bina nahi.<br>
-Tum meri duniya ho.<br><br>
-Chalo shuru karte hain!
+Tum mere ho<br>
+Mai tumhare bina ek pal bhi nahi sakta<br>
+Tum Mera sab kuch ho<br>
+Will you marry me Ziyu!
 </p>
 <button id="yes" onclick="sayYes()">YES 💍</button>
 <button id="no" onclick="moveNo()">NO 😅</button>
@@ -105,7 +110,7 @@ Chalo shuru karte hain!
 <audio id="song" src="song.mp3" preload="auto"></audio>
 <img id="photo" src="photo1.jpg" alt="Photo">
 <div id="questions"></div>
-<div id="celebration">🥳 Congratulations! 💕</div>
+<div id="celebration">🥳 Tum mere ho baby ji 💕</div>
 
 <video id="endVideo" width="100%" style="aspect-ratio:9/16; display:none; border-radius:15px; margin-top:20px;" controls autoplay muted playsinline>
   <source src="video.mp4" type="video/mp4">
