@@ -2,95 +2,150 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Will You Marry Me?</title>
+  <title>For You ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #ffb6c1, #ffe4e1);
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      padding: 30px;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #ffdee9, #b5fffc);
+      overflow: hidden;
+    }
+
+    .container {
+      padding: 20px;
     }
 
     h1 {
+      color: #d6336c;
       font-size: 28px;
-      color: #b30059;
     }
 
     p {
       font-size: 18px;
-      color: #4d0026;
-      margin-top: 20px;
+      color: #333;
+      margin-top: 15px;
     }
 
     button {
-      padding: 15px 30px;
+      padding: 12px 25px;
       font-size: 18px;
+      margin: 15px;
       border: none;
-      border-radius: 30px;
+      border-radius: 8px;
       cursor: pointer;
-      margin: 20px;
     }
 
     #yes {
-      background-color: #ff4081;
+      background: #28a745;
       color: white;
     }
 
     #no {
-      background-color: #555;
+      background: #dc3545;
       color: white;
-      position: absolute;
+      position: relative;
     }
 
-    #surprise {
+    #loveSection {
       display: none;
-      margin-top: 30px;
+      animation: fadeIn 2s ease-in-out;
     }
 
     img {
       width: 80%;
       max-width: 300px;
       border-radius: 20px;
-      box-shadow: 0 0 20px pink;
+      margin-top: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .flower {
+      position: absolute;
+      font-size: 24px;
+      animation: fall 5s linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        top: -10%;
+        opacity: 1;
+      }
+      100% {
+        top: 110%;
+        opacity: 0;
+      }
     }
   </style>
 </head>
+
 <body>
 
-  <h1>Ziya ❤️</h1>
+  <div class="container" id="questionSection">
+    <h1>Ziya ❤️</h1>
+    <p>
+      Ziya tum sirf meri ho.<br>
+      Main tumhare bina nahi ji sakta.<br>
+      Tum meri duniya ho, meri dua ho.<br><br>
+      Kya tum meri zindagi banogi?
+    </p>
 
-  <p>
-    Ziya, tum sirf meri ho.  
-    Main tumhare bina nahi ji sakta.  
-    Tum meri zindagi ho, meri duniya ho.  
-    Kya tum hamesha meri rahogi?
-  </p>
+    <button id="yes" onclick="sayYes()">YES 💍</button>
+    <button id="no" onclick="moveNo()">NO 😅</button>
+  </div>
 
-  <button id="yes" onclick="showLove()">YES 💍</button>
-  <button id="no" onmouseover="moveNo()">NO 😅</button>
+  <div class="container" id="loveSection">
+    <h1>I Love You Ziya ❤️</h1>
+    <p>
+      Tum mere dil ki har dhadkan ho.<br>
+      Aaj se hamesha ke liye ❤️
+    </p>
 
-  <div id="surprise">
-    <h2>Forever Together 💖</h2>
-    <img src="photo.jpg" alt="Us moment">
-    <p>Main tumse beinteha mohabbat karta hoon.</p>
-    <audio id="song" autoplay loop>
-      <source src="song.mp3" type="audio/mpeg">
-    </audio>
+    <img src="photo.jpg" alt="Us Moment">
+
+    <audio id="song" src="song.mp3"></audio>
   </div>
 
   <script>
     function moveNo() {
       const noBtn = document.getElementById("no");
-      noBtn.style.top = Math.random() * window.innerHeight + "px";
-      noBtn.style.left = Math.random() * window.innerWidth + "px";
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
     }
 
-    function showLove() {
-      document.getElementById("surprise").style.display = "block";
-      document.getElementById("yes").style.display = "none";
-      document.getElementById("no").style.display = "none";
+    function sayYes() {
+      document.getElementById("questionSection").style.display = "none";
+      document.getElementById("loveSection").style.display = "block";
       document.getElementById("song").play();
+      createFlowers();
+    }
+
+    function createFlowers() {
+      for (let i = 0; i < 20; i++) {
+        const flower = document.createElement("div");
+        flower.className = "flower";
+        flower.innerHTML = "🌸";
+        flower.style.left = Math.random() * 100 + "vw";
+        flower.style.animationDuration = (Math.random() * 3 + 3) + "s";
+        document.body.appendChild(flower);
+
+        setTimeout(() => {
+          flower.remove();
+        }, 5000);
+      }
     }
   </script>
 
