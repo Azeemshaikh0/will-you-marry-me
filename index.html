@@ -48,13 +48,35 @@ button:hover{ transform:scale(1.1); }
 @keyframes sparkleAnim{0%{opacity:1;}50%{opacity:0.3;}100%{opacity:1;}}
 
 #toast{ position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#ff4466; color:white; padding:12px 20px; border-radius:15px; z-index:9999; font-size:16px; opacity:0; transition:opacity 0.3s ease; }
+#nazar{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:42px;
+  display:none;
+  z-index:10000;
+  animation:nazarFade 2s ease forwards;
+}
+
+@keyframes nazarFade{
+  from{
+    opacity:0;
+    transform:translateX(-50%) scale(0.8);
+  }
+  to{
+    opacity:1;
+    transform:translateX(-50%) scale(1);
+  }
+}
+
 </style>
 </head>
 <body>
 
 <div class="container" id="questionSection">
 <h1>Hello Ziyu❤️</h1>
-<p>Tum mere ho<br>Mai tumhare bina ek pal bhi nahi sakta<br>Tum Mera sab kuch ho<br>Will you marry me Ziyu!</p>
+<p>Tum mere ho<br>Mai tumhare bina ek pal bhi nahi rahe sakta<br>Tum Mera sab kuch ho<br>Will you marry me Ziyu!</p>
 <button id="yes" onclick="sayYes()">YES 💍</button>
 <button id="no" onclick="moveNo()">NO 😅</button>
 </div>
@@ -70,7 +92,8 @@ button:hover{ transform:scale(1.1); }
 </div>
 
 <div id="toast">Maar khati kamini 👊</div>
-
+<div id="nazar">🧿</div>
+  
 <script>
 const photos=["photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg","photo5.jpg","photo6.jpg","photo7.jpg","photo8.jpg","photo9.jpg","photo10.jpg","photo11.jpg"];
 let currentQ=0;
@@ -191,7 +214,10 @@ function sayYes(){
     showQuestion(0); 
 }
 
-function showVideo(){ document.getElementById("endVideo").style.display="block"; }
+function showVideo(){
+  document.getElementById("endVideo").style.display="block";
+  document.getElementById("nazar").style.display="block";
+}
 </script>
 
 </body>
