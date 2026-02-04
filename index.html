@@ -8,19 +8,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
-html, body{ margin:0; padding:0; height:100%; overflow-x:hidden; font-family:Arial,sans-serif; }
-body{ background: linear-gradient(-45deg,#ffe0f0,#f0dfff,#e0f0ff,#fff0e0); background-size:400% 400%; animation: gradientBG 20s ease infinite; display:flex; justify-content:center; align-items:center; }
-
+html, body { margin:0; padding:0; height:100%; overflow-x:hidden; font-family:Arial,sans-serif; }
+body { background: linear-gradient(-45deg,#ffe0f0,#f0dfff,#e0f0ff,#fff0e0); background-size:400% 400%; animation: gradientBG 20s ease infinite; display:flex; justify-content:center; align-items:center; }
 @keyframes gradientBG { 0%{background-position:0% 50%;} 50%{background-position:100% 50%;} 100%{background-position:0% 50%;} }
-@keyframes fadeIn{ 0%{opacity:0; transform:scale(0.9);} 100%{opacity:1; transform:scale(1);} }
 
-.container{ padding:25px; max-width:600px; width:90%; border-radius:25px; backdrop-filter:blur(15px); background:rgba(255,255,255,0.15); box-shadow:0 0 50px rgba(200,105,180,0.4); text-align:center; transition:transform 0.3s ease; }
+.container { padding:25px; max-width:600px; width:90%; border-radius:25px; backdrop-filter:blur(15px); background:rgba(255,255,255,0.15); box-shadow:0 0 50px rgba(200,105,180,0.4); text-align:center; transition:transform 0.3s ease; }
 
-#questionSection{ opacity:0; animation: fadeIn 1.5s forwards; }
-
-h1,h2,p{ font-family:'Dancing Script', cursive; color:#333; text-shadow:0 0 10px #aaa; }
-button{ padding:12px 25px; font-size:18px; margin:10px; border:none; border-radius:15px; cursor:pointer; background:linear-gradient(145deg,#fff,#ffe0f0); box-shadow:0 0 15px rgba(0,0,0,0.2); transition:all 0.3s ease, transform 0.3s ease; }
-button:hover{ transform:scale(1.1); }
+h1,h2,p { font-family:'Dancing Script', cursive; color:#333; text-shadow:0 0 10px #aaa; }
+button { padding:12px 25px; font-size:18px; margin:10px; border:none; border-radius:15px; cursor:pointer; background:linear-gradient(145deg,#fff,#ffe0f0); box-shadow:0 0 15px rgba(0,0,0,0.2); transition:all 0.3s ease, transform 0.3s ease; }
+button:hover { transform:scale(1.1); }
 #yes{ background:#ff77aa; color:white; } 
 #no{ background:#ff4466; color:white; position:relative; }
 
@@ -32,11 +28,16 @@ button:hover{ transform:scale(1.1); }
 #questions button{ width:80%; display:block; margin:10px auto; border-radius:15px; font-size:20px; background:linear-gradient(145deg,#ffe0f0,#ffd1ff); box-shadow:0 0 10px rgba(0,0,0,0.2); color:#333; }
 #questions button:hover{ transform:scale(1.05); }
 
-#celebration{ display:none; font-size:28px; color:#ff6699; margin-top:20px; animation:pulse 1.5s infinite; }
+#congrats{ display:none; font-size:28px; color:#ff6699; margin-top:20px; animation:pulse 1.5s infinite; }
 @keyframes pulse{0%{transform:scale(1); text-shadow:0 0 5px #ff77aa;}50%{transform:scale(1.1); text-shadow:0 0 15px #ffb6c1;}100%{transform:scale(1); text-shadow:0 0 5px #ff77aa;}}
 
-.floating-emoji{ position:fixed; font-size:20px; animation:floatUp linear infinite; pointer-events:none; z-index:9998; user-select:none;}
-@keyframes floatUp{0%{transform:translateY(100vh) scale(0.5) rotate(0deg);}100%{transform:translateY(-50px) scale(1) rotate(360deg) opacity:0;}}
+.falling-flower{ position:fixed; top:-20px; font-size:25px; animation:fall linear forwards; pointer-events:none; z-index:9999; }
+@keyframes fall{0%{transform:translateY(-20px) rotate(0deg) scale(0.8); opacity:0.5;}100%{transform:translateY(100vh) rotate(360deg) scale(1); opacity:0;}}
+
+#emojiBlink{ position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); font-size:60px; opacity:0; z-index:9999; pointer-events:none; }
+
+#endVideo{ width:100%; aspect-ratio:9/16; display:none; border-radius:15px; margin-top:20px; }
+#lastEmoji{ position:fixed; top:20%; left:50%; transform:translateX(-50%); font-size:60px; opacity:0; z-index:9999; pointer-events:none; }
 
 #toast{ position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#ff4466; color:white; padding:12px 20px; border-radius:15px; z-index:9999; font-size:16px; opacity:0; transition:opacity 0.3s ease; }
 </style>
@@ -54,28 +55,27 @@ button:hover{ transform:scale(1.1); }
 <audio id="song" src="song.mp3" preload="auto"></audio>
 <img id="photo" src="photo1.jpg" alt="Photo">
 <div id="questions"></div>
-<div id="celebration">🥳 Congratulations! Tum mere ho baby ji ❤️</div>
-<video id="endVideo" width="100%" style="aspect-ratio:9/16; display:none; border-radius:15px; margin-top:20px;" controls autoplay muted playsinline>
+<div id="congrats">🥳 Tum mere ho baby ji ❤️</div>
+<video id="endVideo" controls autoplay muted playsinline>
 <source src="video.mp4" type="video/mp4">
 </video>
+<div id="emojiBlink">💕</div>
+<div id="lastEmoji">🧿</div>
 </div>
 
 <div id="toast">Maar khati kamini 👊</div>
 
 <script>
-// Photos
 const photos=["photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg","photo5.jpg","photo6.jpg","photo7.jpg","photo8.jpg","photo9.jpg","photo10.jpg","photo11.jpg"];
 let currentQ=0;
-
-// Quiz
 const quiz=[
 {q:"Tum kiske ho?", options:["Tumhari ❤️","Jo le gaya","Kya pata","Kis ki bhi nahi"], correct:0},
-{q:"Azeem kon hai tumhara?", options:["Sab kuch 🧿","kuch b nahi","Toy","Diwana"], correct:0},
+{q:"Azeem kon hai tumhara?", options:["Sab kuch 💕","kuch b nahi","Toy","Diwana"], correct:0},
 {q:"Tum Azeem ko kitna piyar karte ho?", options:["Jaan se zyada 😘","Thoda sa 🥲","Nahi karti 😏","Kon Azeem 😂"], correct:0},
 {q:"Tumhara favorite color?", options:["White 🤍","Blue 💙","Red ❤️","Green 💚"], correct:0}
 ];
 
-// Show quiz question
+// Quiz functions
 function showQuestion(qIndex){
 currentQ=qIndex;
 const qDiv=document.getElementById("questions");
@@ -87,28 +87,28 @@ let btn=document.createElement("button"); btn.textContent=opt; btn.onclick=()=>c
 qDiv.style.display="block"; fadePhoto(qIndex);
 }
 
-// Photo fade
 function fadePhoto(index){
 const photo=document.getElementById("photo");
-photo.style.opacity=0;
-photo.style.transform="scale(0.95)";
+photo.style.opacity=0; photo.style.transform="scale(0.95)";
 setTimeout(()=>{ if(index<photos.length){ photo.src=photos[index]; photo.style.opacity=1; photo.style.transform="scale(1)"; } },500);
 }
 
-// Check answer
 function checkAnswer(selected,btn){
 if(selected===quiz[currentQ].correct){
-btn.classList.add("correct");
+btn.classList.add("correct"); miniConfetti();
+setTimeout(()=>btn.classList.remove("correct"),900);
 let nextQ=currentQ+1;
-setTimeout(()=>{
-btn.classList.remove("correct");
 if(nextQ<quiz.length){ showQuestion(nextQ); }
-else{ document.getElementById("questions").style.display="none"; showExtraPhotos(quiz.length); }
-},900);
-}else{ btn.classList.add("wrong"); showToast(); setTimeout(()=>btn.classList.remove("wrong"),500); }
+else{
+document.getElementById("questions").style.display="none";
+showBlinkEmoji();
+showExtraPhotos(quiz.length);
+}
+}else{
+btn.classList.add("wrong"); showToast(); setTimeout(()=>btn.classList.remove("wrong"),500);
+}
 }
 
-// Toast
 function showToast(){
 const toast=document.getElementById("toast");
 toast.style.opacity=1;
@@ -116,40 +116,70 @@ if(navigator.vibrate){ navigator.vibrate(200); }
 setTimeout(()=>{ toast.style.opacity=0; },1500);
 }
 
-// Extra photos then video
+// 💕 emoji fade
+function showBlinkEmoji(){
+const emoji=document.getElementById("emojiBlink");
+emoji.style.opacity=1;
+setTimeout(()=>{ emoji.style.opacity=0; },1200);
+}
+
+// Extra photos after quiz
 function showExtraPhotos(startIndex){
 let idx=startIndex; const photo=document.getElementById("photo");
 const interval=setInterval(()=>{
 photo.style.opacity=0; photo.style.transform="scale(0.95)";
 setTimeout(()=>{
 if(idx<photos.length){ photo.src=photos[idx]; photo.style.opacity=1; photo.style.transform="scale(1)"; idx++; } 
-else { clearInterval(interval); showVideo(); window.scrollTo({top:document.body.scrollHeight, behavior:"smooth"}); celebrate(); }
+else { clearInterval(interval); showCongrats(); showVideo(); showLastEmoji(); startFloatingFlowers(); window.scrollTo({top:document.body.scrollHeight, behavior:"smooth"}); }
 },500);
 },2500);
 }
 
-// Celebration 🧿 only last
-function celebrate(){
-const celebration=document.getElementById("celebration");
-celebration.style.display="block";
+// Congratulations
+function showCongrats(){ document.getElementById("congrats").style.display="block"; }
 
+// Video show
+function showVideo(){ document.getElementById("endVideo").style.display="block"; }
+
+// 🧿 emoji last
+function showLastEmoji(){
+const last=document.getElementById("lastEmoji");
+last.style.opacity=1;
+}
+
+// Floating flowers
+function startFloatingFlowers(){
 setInterval(()=>{
-const nazar=document.createElement("div");
-nazar.className="floating-emoji";
-nazar.style.left=Math.random()*100+"vw";
-nazar.style.fontSize=20+Math.random()*15+"px";
-nazar.textContent="🧿";
-document.body.appendChild(nazar);
-setTimeout(()=>nazar.remove(),10000);
+const flower=document.createElement("div");
+flower.className="falling-flower";
+flower.style.left=Math.random()*100+"vw";
+flower.style.animationDuration=6+Math.random()*4+"s";
+flower.textContent="🌸";
+document.body.appendChild(flower);
+setTimeout(()=>flower.remove(),10000);
 },400);
+}
+
+// Mini confetti
+function miniConfetti(){
+for(let i=0;i<25;i++){
+let conf=document.createElement("div");
+conf.className="sparkle";
+conf.textContent="✨";
+conf.style.left=Math.random()*100+"vw";
+conf.style.top=Math.random()*100+"vh";
+conf.style.fontSize=15+Math.random()*20+"px";
+document.body.appendChild(conf);
+setTimeout(()=>conf.remove(),2500);
+}
 }
 
 // Move NO
 function moveNo(){ 
-const noBtn=document.getElementById("no"); 
-const x=Math.random()*200-100; 
-const y=Math.random()*200-100; 
-noBtn.style.transform=`translate(${x}px,${y}px)`; 
+    const noBtn=document.getElementById("no"); 
+    const x=Math.random()*200-100; 
+    const y=Math.random()*200-100; 
+    noBtn.style.transform=`translate(${x}px,${y}px)`; 
 }
 
 // YES click
@@ -159,10 +189,7 @@ document.getElementById("loveSection").style.display="block";
 const song=document.getElementById("song"); song.loop=true; song.volume=0.6; song.play(); 
 showQuestion(0); 
 }
-
-// Show video
-function showVideo(){ document.getElementById("endVideo").style.display="block"; }
-
 </script>
+
 </body>
 </html>
