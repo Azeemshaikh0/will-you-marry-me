@@ -1,715 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>For My Ziyu ❤️</title>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
-    :root {
-        --primary: #ff4d6d;
-        --secondary: #ff8fa3;
-        --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-        --glass: rgba(255, 255, 255, 0.3);
-        --glass-border: rgba(255, 255, 255, 0.6);
-        --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For My Ziyu ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff4d6d;
+            --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+        }
 
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-    html, body {
-        margin: 0; padding: 0; height: 100%; width: 100%;
-        overflow-x: hidden;
-        font-family: 'Poppins', sans-serif;
-    }
+        body {
+            margin: 0; padding: 0; min-height: 100vh;
+            background: var(--bg-gradient);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex; justify-content: center; align-items: center;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            transition: opacity 1.5s ease;
+        }
 
-    body {
-        background: var(--bg-gradient);
-        background-size: 400% 400%;
-        animation: gradientBG 15s ease infinite;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        transition: opacity 2s ease; /* For ending fade out */
-    }
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-    @keyframes gradientBG { 
-        0% { background-position: 0% 50%; } 
-        50% { background-position: 100% 50%; } 
-        100% { background-position: 0% 50%; } 
-    }
+        .container {
+            position: relative; z-index: 10; padding: 25px; width: 90%; max-width: 400px;
+            background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(15px);
+            border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1); text-align: center;
+        }
 
-    /* Background Floating Hearts */
-    .bg-heart {
-        position: absolute;
-        color: rgba(255, 255, 255, 0.4);
-        font-size: 2rem;
-        animation: floatBG 12s infinite linear;
-        z-index: 0;
-        pointer-events: none;
-    }
+        h1 { font-family: 'Dancing Script', cursive; color: #d6336c; font-size: 2.5rem; }
+        p { font-family: 'Pacifico', cursive; color: #444; font-size: 1rem; }
 
-    @keyframes floatBG {
-        0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
-        50% { opacity: 0.8; }
-        100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
-    }
+        /* Photo Frame 9:16 */
+        #photo-frame {
+            width: 100%; aspect-ratio: 9/16; position: relative;
+            overflow: hidden; border-radius: 15px; margin-bottom: 20px;
+            border: 4px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
 
-    /* Main Container */
-    .container {
-        position: relative;
-        z-index: 10;
-        padding: 25px;
-        width: 90%;
-        max-width: 480px;
-        background: var(--glass);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-radius: 24px;
-        border: 1px solid var(--glass-border);
-        box-shadow: var(--shadow);
-        text-align: center;
-        transition: all 0.5s ease;
-    }
+        #photo {
+            width: 100%; height: 100%; object-fit: cover;
+            opacity: 1; transition: opacity 0.8s ease-in-out;
+        }
 
-    h1 {
-        font-family: 'Dancing Script', cursive;
-        color: #d6336c;
-        font-size: 2.8rem;
-        margin-bottom: 10px;
-        text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
-    }
-    
-    p { 
-        font-family: 'Pacifico', cursive; 
-        font-size: 1.1rem; 
-        color: #444; 
-        line-height: 1.6; 
-        margin-bottom: 25px; 
-    }
+        button {
+            padding: 12px 30px; border: none; border-radius: 50px;
+            cursor: pointer; font-weight: 600; transition: 0.3s;
+            margin: 10px; font-family: 'Poppins';
+        }
 
-    /* Buttons */
-    .btn-group { display: flex; justify-content: center; gap: 15px; margin-top: 20px;}
-    
-    button {
-        padding: 12px 35px;
-        font-size: 1.1rem;
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        font-family: 'Poppins', sans-serif;
-        font-weight: 600;
-        transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.27);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
+        #yes { background: #ff4d6d; color: white; }
+        #no { background: white; color: #ff4d6d; position: relative; }
 
-    #yes { background: linear-gradient(45deg, #ff4d6d, #ff8fa3); color: white; }
-    #yes:hover { transform: scale(1.1); box-shadow: 0 8px 25px rgba(255, 77, 109, 0.5); }
-    
-    #no { background: white; color: #ff4d6d; position: relative; }
+        #toast {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8);
+            background: rgba(255, 71, 87, 0.95); color: white; padding: 25px 40px;
+            border-radius: 20px; z-index: 10000; opacity: 0; pointer-events: none;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.27);
+            font-size: 1.5rem; font-weight: bold; text-align: center;
+        }
+        #toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 
-    /* Photo Frame - 9:16 Ratio Logic */
-    #photo-frame {
-        width: 100%;
-        /* 9:16 Aspect Ratio Calculation */
-        padding-top: 177.77%; 
-        position: relative;
-        overflow: hidden;
-        border-radius: 20px;
-        margin: 0 auto 20px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        border: 4px solid white;
-        background: #fff0f5; /* Light pink placeholder */
-    }
+        #questions button { display: block; width: 100%; margin: 10px 0; background: white; }
+        #questions button.correct { background: #2ed573; color: white; }
+        #questions button.wrong { background: #ff4757; color: white; animation: shake 0.4s; }
 
-    #photo {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* Ensures photo fills the 9:16 area */
-        transition: opacity 0.8s ease-in-out; /* Smooth Fade Transition */
-    }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
 
-    /* Questions & Options */
-    #questions h2 {
-        font-family: 'Dancing Script', cursive;
-        font-size: 1.8rem;
-        color: #333;
-        margin-bottom: 15px;
-    }
-
-    #questions button {
-        display: block;
-        width: 100%;
-        margin: 12px 0;
-        background: rgba(255,255,255,0.8);
-        color: #333;
-        border: 1px solid white;
-    }
-    
-    #questions button:active { transform: scale(0.95); }
-    #questions button.correct { background: #2ed573 !important; color: white; }
-    #questions button.wrong { background: #ff4757 !important; color: white; animation: shake 0.4s; }
-
-    @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        25% { transform: translateX(-8px); }
-        75% { transform: translateX(8px); }
-    }
-
-    /* Big Toast Notification */
-    #toast {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0.8);
-        background: rgba(255, 71, 87, 0.95);
-        color: white;
-        padding: 20px 40px;
-        border-radius: 20px;
-        z-index: 10000;
-        opacity: 0;
-        pointer-events: none;
-        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        font-size: 1.4rem; /* Bigger Text */
-        font-weight: bold;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        text-align: center;
-        white-space: nowrap;
-    }
-    #toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-
-    /* Video & Nazar */
-    video { 
-        width: 100%; 
-        border-radius: 15px; 
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
-        margin-top: 15px; 
-        display: none;
-        aspect-ratio: 9/16;
-        object-fit: cover;
-    }
-    
-    #nazar {
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 3.5rem;
-        display: none;
-        animation: floatNazar 3s ease-in-out infinite;
-        z-index: 9999;
-    }
-
-    @keyframes floatNazar { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -10px); } }
-
-    #loveSection { display: none; }
-    #celebration { display: none; font-size: 2rem; color: #d6336c; font-family: 'Pacifico', cursive; margin: 20px 0; }
-
-</style>
+        video { width: 100%; border-radius: 15px; display: none; aspect-ratio: 9/16; object-fit: cover; }
+        #nazar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 3rem; display: none; }
+    </style>
 </head>
 <body>
 
-    <div id="bg-elements"></div>
-
     <div class="container" id="questionSection">
         <h1>Hello Ziyu ❤️</h1>
-        <p>Tum mere ho<br>Mai tumhare bina ek pal bhi nahi rahe sakta<br>Tum Mera sab kuch ho<br>Will you marry me Ziyu!</p>
-        <div class="btn-group">
-            <button id="yes" onclick="sayYes()">YES 💍</button>
-            <button id="no" onclick="moveNo()">NO 😅</button>
-        </div>
+        <p>Tum mere ho... Will you marry me Ziyu!</p>
+        <button id="yes" onclick="sayYes()">YES 💍</button>
+        <button id="no" onmouseover="moveNo()" onclick="moveNo()">NO 😅</button>
     </div>
 
-    <div class="container" id="loveSection">
-        <audio id="song" src="song.mp3" preload="auto"></audio>
-        
-        <div id="photo-frame">
-            <img id="photo" src="photo1.jpg" alt="Memories">
-        </div>
-        
+    <div class="container" id="loveSection" style="display:none;">
+        <audio id="song" src="song.mp3" loop></audio>
+        <div id="photo-frame"><img id="photo" src="photo1.jpg"></div>
         <div id="questions"></div>
-        <div id="celebration">🥳 Tum mere ho baby ji 💕</div>
-        
-        <video id="endVideo" controls playsinline>
-            <source src="video.mp4" type="video/mp4">
-        </video>
+        <video id="endVideo" playsinline><source src="video.mp4" type="video/mp4"></video>
+        <div id="celebration" style="display:none; font-family:'Pacifico'; color:#d6336c; margin-top:10px;">🥳 Tum mere ho baby ji 💕</div>
     </div>
 
     <div id="toast">Maar khati kamini 👊</div>
     <div id="nazar">🧿</div>
 
-<script>
-    const photos = ["photo1.jpg", "photo2.jpg", "photo3.jpg", "photo4.jpg", "photo5.jpg", "photo6.jpg", "photo7.jpg", "photo8.jpg", "photo9.jpg", "photo10.jpg", "photo11.jpg"];
-    
-    const quizData = [
-        { q: "Tum kiske ho?", options: ["Tumhari ❤️", "Jo le gaya", "Kya pata", "Kis ki bhi nahi"], correct: 0 },
-        { q: "Azeem kon hai tumhara?", options: ["Sab kuch 💕", "kuch b nahi", "Toy", "Diwana"], correct: 0 },
-        { q: "Tum Azeem ko kitna piyar karte ho?", options: ["Jaan se zyada 😘", "Thoda sa 🥲", "Nahi karti 😏", "Kon Azeem 😂"], correct: 0 },
-        { q: "Tumhara favorite color?", options: ["White 🤍", "Blue 💙", "Red ❤️", "Green 💚"], correct: 0 }
-    ];
+    <script>
+        const photos = ["photo1.jpg", "photo2.jpg", "photo3.jpg", "photo4.jpg", "photo5.jpg", "photo6.jpg", "photo7.jpg", "photo8.jpg", "photo9.jpg", "photo10.jpg", "photo11.jpg"];
+        const quizData = [
+            { q: "Tum kiske ho?", options: ["Tumhari ❤️", "Jo le gaya", "Kya pata", "Kis ki bhi nahi"], correct: 0 },
+            { q: "Azeem kon hai tumhara?", options: ["Sab kuch 💕", "kuch b nahi", "Toy", "Diwana"], correct: 0 },
+            { q: "Tum Azeem ko kitna piyar karte ho?", options: ["Jaan se zyada 😘", "Thoda sa 🥲", "Nahi karti 😏", "Kon Azeem 😂"], correct: 0 }
+        ];
 
-    let currentQIndex = 0;
+        let currentQ = 0;
 
-    // Background Hearts
-    function createBgHearts() {
-        const container = document.getElementById('bg-elements');
-        for(let i=0; i<15; i++) {
-            let heart = document.createElement('div');
-            heart.className = 'bg-heart';
-            heart.innerHTML = '❤';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 5 + 8) + 's';
-            heart.style.animationDelay = Math.random() * 5 + 's';
-            container.appendChild(heart);
+        function moveNo() {
+            const btn = document.getElementById("no");
+            btn.style.position = 'fixed';
+            btn.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+            btn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
         }
-    }
-    createBgHearts();
 
-    // No Button Logic
-    function moveNo() {
-        const btn = document.getElementById("no");
-        btn.style.position = "fixed"; 
-        const padding = 20;
-        const maxX = window.innerWidth - btn.offsetWidth - padding;
-        const maxY = window.innerHeight - btn.offsetHeight - padding;
-        btn.style.left = Math.random() * (maxX - padding) + padding + "px";
-        btn.style.top = Math.random() * (maxY - padding) + padding + "px";
-    }
-
-    // Yes Button Logic
-    function sayYes() {
-        document.getElementById("questionSection").style.display = "none";
-        const lSec = document.getElementById("loveSection");
-        lSec.style.display = "block";
-        
-        const song = document.getElementById("song");
-        song.volume = 0.5;
-        song.play().catch(e => console.log("Audio requires interaction"));
-        
-        loadQuiz(0);
-    }
-
-    // Quiz System
-    function loadQuiz(index) {
-        currentQIndex = index;
-        const qDiv = document.getElementById("questions");
-        qDiv.innerHTML = "";
-        
-        const h2 = document.createElement("h2");
-        h2.textContent = quizData[index].q;
-        qDiv.appendChild(h2);
-
-        quizData[index].options.forEach((opt, i) => {
-            let btn = document.createElement("button");
-            btn.textContent = opt;
-            btn.onclick = () => handleAnswer(i, btn);
-            qDiv.appendChild(btn);
-        });
-
-        // Photo update
-        const photo = document.getElementById("photo");
-        // Fade effect
-        photo.style.opacity = 0;
-        setTimeout(() => {
-            if(index < photos.length) photo.src = photos[index];
-            photo.style.opacity = 1;
-        }, 500);
-    }
-
-    function handleAnswer(selectedIndex, btnElement) {
-        if (selectedIndex === quizData[currentQIndex].correct) {
-            btnElement.classList.add("correct");
-            confettiEffect(btnElement);
-            setTimeout(() => {
-                if (currentQIndex + 1 < quizData.length) {
-                    loadQuiz(currentQIndex + 1);
-                } else {
-                    startSlideshow(); // Quiz done, show remaining photos
-                }
-            }, 800);
-        } else {
-            // Wrong Answer
-            btnElement.classList.add("wrong");
-            // Vibrate phone (works on Android)
-            if (navigator.vibrate) navigator.vibrate([100, 50, 100]); 
-            showToast();
-            setTimeout(() => btnElement.classList.remove("wrong"), 500);
+        function sayYes() {
+            document.getElementById("questionSection").style.display = "none";
+            document.getElementById("loveSection").style.display = "block";
+            document.getElementById("song").play();
+            loadQuiz(0);
         }
-    }
 
-    // Big Toast Logic
-    function showToast() {
-        const toast = document.getElementById("toast");
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 2000);
-    }
+        function loadQuiz(idx) {
+            currentQ = idx;
+            const qDiv = document.getElementById("questions");
+            qDiv.innerHTML = `<h2>${quizData[idx].q}</h2>`;
+            quizData[idx].options.forEach((opt, i) => {
+                const b = document.createElement("button");
+                b.innerText = opt;
+                b.onclick = () => checkAns(i, b);
+                qDiv.appendChild(b);
+            });
+            updatePhoto(idx);
+        }
 
-    // Slideshow before video
-    function startSlideshow() {
-        document.getElementById("questions").style.display = "none";
-        let idx = quizData.length;
-        const photo = document.getElementById("photo");
-        
-        const interval = setInterval(() => {
-            photo.style.opacity = 0;
+        function updatePhoto(idx) {
+            const img = document.getElementById("photo");
+            img.style.opacity = 0;
             setTimeout(() => {
-                if (idx < photos.length) {
-                    photo.src = photos[idx];
-                    photo.style.opacity = 1;
-                    idx++;
+                if(photos[idx]) img.src = photos[idx];
+                img.style.opacity = 1;
+            }, 400);
+        }
+
+        function checkAns(i, btn) {
+            if(i === quizData[currentQ].correct) {
+                btn.classList.add("correct");
+                setTimeout(() => {
+                    if(currentQ + 1 < quizData.length) loadQuiz(currentQ + 1);
+                    else startFinal();
+                }, 800);
+            } else {
+                btn.classList.add("wrong");
+                if(navigator.vibrate) navigator.vibrate(200);
+                const t = document.getElementById("toast");
+                t.classList.add("show");
+                setTimeout(() => t.classList.remove("show"), 2000);
+            }
+        }
+
+        function startFinal() {
+            document.getElementById("questions").style.display = "none";
+            let pIdx = quizData.length;
+            const interval = setInterval(() => {
+                if(pIdx < photos.length) {
+                    updatePhoto(pIdx);
+                    pIdx++;
                 } else {
                     clearInterval(interval);
-                    showVideo();
+                    showEnd();
                 }
-            }, 800); // 800ms fade duration
-        }, 2500); // Change every 2.5s
-    }
+            }, 2000);
+        }
 
-    // Video & Ending Logic
-    function showVideo() {
-        const frame = document.getElementById("photo-frame");
-        const vid = document.getElementById("endVideo");
-        const cel = document.getElementById("celebration");
-        
-        frame.style.display = "none";
-        cel.style.display = "block";
-        vid.style.display = "block";
-        document.getElementById("nazar").style.display = "block";
-        
-        vid.play();
-
-        // When Video Ends
-        vid.onended = function() {
-            // 1. Stop Song
-            const song = document.getElementById("song");
-            song.pause();
-            song.currentTime = 0;
+        function showEnd() {
+            document.getElementById("photo-frame").style.display = "none";
+            document.getElementById("celebration").style.display = "block";
+            const v = document.getElementById("endVideo");
+            v.style.display = "block";
+            document.getElementById("nazar").style.display = "block";
+            v.play();
             
-            // 2. Fade Out Everything
-            document.body.style.opacity = "0";
-            document.body.style.pointerEvents = "none";
-        };
-    }
-
-    function confettiEffect(el) {
-        // Simple visual feedback using emojis
-        const rect = el.getBoundingClientRect();
-        for(let i=0; i<8; i++){
-            let p = document.createElement("div");
-            p.textContent = "💖";
-            p.style.position = "fixed";
-            p.style.left = rect.left + rect.width/2 + "px";
-            p.style.top = rect.top + "px";
-            p.style.transition = "all 1s";
-            p.style.fontSize = "20px";
-            document.body.appendChild(p);
-            setTimeout(()=>{
-                p.style.transform = `translate(${Math.random()*100-50}px, -100px)`;
-                p.style.opacity = 0;
-            },10);
-            setTimeout(()=>p.remove(),1000);
+            v.onended = () => {
+                document.getElementById("song").pause();
+                document.body.style.opacity = "0";
+            };
         }
-    }
-</script>
+    </script>
 </body>
 </html>
-    #photo {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* Ensures photo fills the 9:16 area */
-        transition: opacity 0.8s ease-in-out; /* Smooth Fade Transition */
-    }
-
-    /* Questions & Options */
-    #questions h2 {
-        font-family: 'Dancing Script', cursive;
-        font-size: 1.8rem;
-        color: #333;
-        margin-bottom: 15px;
-    }
-
-    #questions button {
-        display: block;
-        width: 100%;
-        margin: 12px 0;
-        background: rgba(255,255,255,0.8);
-        color: #333;
-        border: 1px solid white;
-    }
-    
-    #questions button:active { transform: scale(0.95); }
-    #questions button.correct { background: #2ed573 !important; color: white; }
-    #questions button.wrong { background: #ff4757 !important; color: white; animation: shake 0.4s; }
-
-    @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        25% { transform: translateX(-8px); }
-        75% { transform: translateX(8px); }
-    }
-
-    /* Big Toast Notification */
-    #toast {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0.8);
-        background: rgba(255, 71, 87, 0.95);
-        color: white;
-        padding: 20px 40px;
-        border-radius: 20px;
-        z-index: 10000;
-        opacity: 0;
-        pointer-events: none;
-        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        font-size: 1.4rem; /* Bigger Text */
-        font-weight: bold;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        text-align: center;
-        white-space: nowrap;
-    }
-    #toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-
-    /* Video & Nazar */
-    video { 
-        width: 100%; 
-        border-radius: 15px; 
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
-        margin-top: 15px; 
-        display: none;
-        aspect-ratio: 9/16;
-        object-fit: cover;
-    }
-    
-    #nazar {
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 3.5rem;
-        display: none;
-        animation: floatNazar 3s ease-in-out infinite;
-        z-index: 9999;
-    }
-
-    @keyframes floatNazar { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -10px); } }
-
-    #loveSection { display: none; }
-    #celebration { display: none; font-size: 2rem; color: #d6336c; font-family: 'Pacifico', cursive; margin: 20px 0; }
-
-</style>
-</head>
-<body>
-
-    <div id="bg-elements"></div>
-
-    <div class="container" id="questionSection">
-        <h1>Hello Ziyu ❤️</h1>
-        <p>Tum mere ho<br>Mai tumhare bina ek pal bhi nahi rahe sakta<br>Tum Mera sab kuch ho<br>Will you marry me Ziyu!</p>
-        <div class="btn-group">
-            <button id="yes" onclick="sayYes()">YES 💍</button>
-            <button id="no" onclick="moveNo()">NO 😅</button>
-        </div>
-    </div>
-
-    <div class="container" id="loveSection">
-        <audio id="song" src="song.mp3" preload="auto"></audio>
-        
-        <div id="photo-frame">
-            <img id="photo" src="photo1.jpg" alt="Memories">
-        </div>
-        
-        <div id="questions"></div>
-        <div id="celebration">🥳 Tum mere ho baby ji 💕</div>
-        
-        <video id="endVideo" controls playsinline>
-            <source src="video.mp4" type="video/mp4">
-        </video>
-    </div>
-
-    <div id="toast">Maar khati kamini 👊</div>
-    <div id="nazar">🧿</div>
-
-<script>
-    const photos = ["photo1.jpg", "photo2.jpg", "photo3.jpg", "photo4.jpg", "photo5.jpg", "photo6.jpg", "photo7.jpg", "photo8.jpg", "photo9.jpg", "photo10.jpg", "photo11.jpg"];
-    
-    const quizData = [
-        { q: "Tum kiske ho?", options: ["Tumhari ❤️", "Jo le gaya", "Kya pata", "Kis ki bhi nahi"], correct: 0 },
-        { q: "Azeem kon hai tumhara?", options: ["Sab kuch 💕", "kuch b nahi", "Toy", "Diwana"], correct: 0 },
-        { q: "Tum Azeem ko kitna piyar karte ho?", options: ["Jaan se zyada 😘", "Thoda sa 🥲", "Nahi karti 😏", "Kon Azeem 😂"], correct: 0 },
-        { q: "Tumhara favorite color?", options: ["White 🤍", "Blue 💙", "Red ❤️", "Green 💚"], correct: 0 }
-    ];
-
-    let currentQIndex = 0;
-
-    // Background Hearts
-    function createBgHearts() {
-        const container = document.getElementById('bg-elements');
-        for(let i=0; i<15; i++) {
-            let heart = document.createElement('div');
-            heart.className = 'bg-heart';
-            heart.innerHTML = '❤';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 5 + 8) + 's';
-            heart.style.animationDelay = Math.random() * 5 + 's';
-            container.appendChild(heart);
-        }
-    }
-    createBgHearts();
-
-    // No Button Logic
-    function moveNo() {
-        const btn = document.getElementById("no");
-        btn.style.position = "fixed"; 
-        const padding = 20;
-        const maxX = window.innerWidth - btn.offsetWidth - padding;
-        const maxY = window.innerHeight - btn.offsetHeight - padding;
-        btn.style.left = Math.random() * (maxX - padding) + padding + "px";
-        btn.style.top = Math.random() * (maxY - padding) + padding + "px";
-    }
-
-    // Yes Button Logic
-    function sayYes() {
-        document.getElementById("questionSection").style.display = "none";
-        const lSec = document.getElementById("loveSection");
-        lSec.style.display = "block";
-        
-        const song = document.getElementById("song");
-        song.volume = 0.5;
-        song.play().catch(e => console.log("Audio requires interaction"));
-        
-        loadQuiz(0);
-    }
-
-    // Quiz System
-    function loadQuiz(index) {
-        currentQIndex = index;
-        const qDiv = document.getElementById("questions");
-        qDiv.innerHTML = "";
-        
-        const h2 = document.createElement("h2");
-        h2.textContent = quizData[index].q;
-        qDiv.appendChild(h2);
-
-        quizData[index].options.forEach((opt, i) => {
-            let btn = document.createElement("button");
-            btn.textContent = opt;
-            btn.onclick = () => handleAnswer(i, btn);
-            qDiv.appendChild(btn);
-        });
-
-        // Photo update
-        const photo = document.getElementById("photo");
-        // Fade effect
-        photo.style.opacity = 0;
-        setTimeout(() => {
-            if(index < photos.length) photo.src = photos[index];
-            photo.style.opacity = 1;
-        }, 500);
-    }
-
-    function handleAnswer(selectedIndex, btnElement) {
-        if (selectedIndex === quizData[currentQIndex].correct) {
-            btnElement.classList.add("correct");
-            confettiEffect(btnElement);
-            setTimeout(() => {
-                if (currentQIndex + 1 < quizData.length) {
-                    loadQuiz(currentQIndex + 1);
-                } else {
-                    startSlideshow(); // Quiz done, show remaining photos
-                }
-            }, 800);
-        } else {
-            // Wrong Answer
-            btnElement.classList.add("wrong");
-            // Vibrate phone (works on Android)
-            if (navigator.vibrate) navigator.vibrate([100, 50, 100]); 
-            showToast();
-            setTimeout(() => btnElement.classList.remove("wrong"), 500);
-        }
-    }
-
-    // Big Toast Logic
-    function showToast() {
-        const toast = document.getElementById("toast");
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 2000);
-    }
-
-    // Slideshow before video
-    function startSlideshow() {
-        document.getElementById("questions").style.display = "none";
-        let idx = quizData.length;
-        const photo = document.getElementById("photo");
-        
-        const interval = setInterval(() => {
-            photo.style.opacity = 0;
-            setTimeout(() => {
-                if (idx < photos.length) {
-                    photo.src = photos[idx];
-                    photo.style.opacity = 1;
-                    idx++;
-                } else {
-                    clearInterval(interval);
-                    showVideo();
-                }
-            }, 800); // 800ms fade duration
-        }, 2500); // Change every 2.5s
-    }
-
-    // Video & Ending Logic
-    function showVideo() {
-        const frame = document.getElementById("photo-frame");
-        const vid = document.getElementById("endVideo");
-        const cel = document.getElementById("celebration");
-        
-        frame.style.display = "none";
-        cel.style.display = "block";
-        vid.style.display = "block";
-        document.getElementById("nazar").style.display = "block";
-        
-        vid.play();
-
-        // When Video Ends
-        vid.onended = function() {
-            // 1. Stop Song
-            const song = document.getElementById("song");
-            song.pause();
-            song.currentTime = 0;
-       // 2. Fade Out Everything
-            document.body.style.opacity = "0";
-            document.body.style.pointerEvents = "none";
-        };
-    }
-
-    function confettiEffect(el) {
-        // Simple visual feedback using emojis
-        const rect = el.getBoundingClientRect();
-        for(let i=0; i<8; i++){
-            let p = document.createElement("div");
-            p.textContent = "💖";
-            p.style.position = "fixed";
-            p.style.left = rect.left + rect.width/2 + "px";
-            p.style.top = rect.top + "px";
-            p.style.transition = "all 1s";
-            p.style.fontSize = "20px";
-            document.body.appendChild(p);
-            setTimeout(()=>{
-                p.style.transform = `translate(${Math.random()*100-50}px, -100px)`;
-                p.style.opacity = 0;
-            },10);
-            setTimeout(()=>p.remove(),1000);
-        }
-    }
-</script>
-</body>
-</html>
-
-
-
