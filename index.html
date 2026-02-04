@@ -1,153 +1,155 @@
-<!DOCTYPE html>
+      <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>For You ❤️</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Ziya ❤️ Surprise</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: linear-gradient(to bottom, #ffdee9, #b5fffc);
+  overflow-x: hidden;
+}
+.container { padding: 20px; max-width: 400px; margin: auto; }
+h1 { color: #d6336c; font-size: 28px; }
+p { font-size: 18px; color: #333; margin-top: 15px; }
+button { padding: 12px 25px; font-size: 18px; margin: 10px; border: none; border-radius: 8px; cursor: pointer; }
+#yes { background: #28a745; color: white; }
+#no { background: #dc3545; color: white; position: relative; }
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #ffdee9, #b5fffc);
-      overflow: hidden;
-    }
+#loveSection { display: none; margin-top: 20px; }
+#slider { width: 100%; max-width: 350px; border-radius: 20px; margin-top: 20px; opacity: 0; transition: opacity 1s ease-in-out; }
+#slider.show { opacity: 1; }
 
-    .container {
-      padding: 20px;
-    }
+#questions { margin-top: 20px; display: none; text-align: center; }
+#questions button { width: 80%; display: block; margin: 10px auto; }
 
-    h1 {
-      color: #d6336c;
-      font-size: 28px;
-    }
-
-    p {
-      font-size: 18px;
-      color: #333;
-      margin-top: 15px;
-    }
-
-    button {
-      padding: 12px 25px;
-      font-size: 18px;
-      margin: 15px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    #yes {
-      background: #28a745;
-      color: white;
-    }
-
-    #no {
-      background: #dc3545;
-      color: white;
-      position: relative;
-    }
-
-    #loveSection {
-      display: none;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    img {
-      width: 80%;
-      max-width: 300px;
-      border-radius: 20px;
-      margin-top: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .flower {
-      position: absolute;
-      font-size: 24px;
-      animation: fall 5s linear infinite;
-    }
-
-    @keyframes fall {
-      0% {
-        top: -10%;
-        opacity: 1;
-      }
-      100% {
-        top: 110%;
-        opacity: 0;
-      }
-    }
-  </style>
+#celebration { display: none; font-size: 24px; color: #28a745; margin-top: 20px; }
+.confetti { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow:visible; z-index:9999; }
+.confetti div { position:absolute; width:10px; height:10px; background: #fbc02d; opacity:0.8; animation: fall linear infinite; }
+@keyframes fall { 0% { transform: translateY(-10px); } 100% { transform: translateY(100vh); } }
+</style>
 </head>
-
 <body>
 
-  <div class="container" id="questionSection">
-    <h1>Ziya ❤️</h1>
-    <p>
-      Ziya tum sirf meri ho.<br>
-      Main tumhare bina nahi ji sakta.<br>
-      Tum meri duniya ho, meri dua ho.<br><br>
-      Kya tum meri zindagi banogi?
-    </p>
+<!-- ORIGINAL QUESTION -->
+<div class="container" id="questionSection">
+  <h1>Ziya ❤️</h1>
+  <p>
+    Ziya tum sirf meri ho.<br>
+    Main tumhare bina nahi ji sakta.<br>
+    Tum meri duniya ho.<br><br>
+    Kya tum meri zindagi banogi?
+  </p>
+  <button id="yes" onclick="sayYes()">YES 💍</button>
+  <button id="no" onclick="moveNo()">NO 😅</button>
+</div>
 
-    <button id="yes" onclick="sayYes()">YES 💍</button>
-    <button id="no" onclick="moveNo()">NO 😅</button>
+<!-- LOVE SECTION -->
+<div class="container" id="loveSection">
+  <h1>Our Memories ❤️</h1>
+  <img id="slider" src="photo1.jpg" alt="Memories">
+  <div id="questions">
+    <!-- Questions will appear here -->
   </div>
+  <div id="celebration">🥳🎉 Congratulations! Tumne sahi jawab diye ❤️</div>
+</div>
 
-  <div class="container" id="loveSection">
-    <h1>I Love You Ziya ❤️</h1>
-    <p>
-      Tum mere dil ki har dhadkan ho.<br>
-      Aaj se hamesha ke liye ❤️
-    </p>
+<script>
+let photos = ["photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg"];
+let index=0, slider, interval;
 
-    <img src="photo.jpg" alt="Us Moment">
+// Shuffle photos
+function shuffle(array){for(let i=array.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[array[i],array[j]]=[array[j],array[i]];}}
 
-    <audio id="song" src="song.mp3"></audio>
-  </div>
+// Slider functions
+function startSlider(){
+  slider = document.getElementById("slider");
+  shuffle(photos);
+  slider.src = photos[index];
+  slider.classList.add("show");
+  interval = setInterval(nextPhoto, 3000);
+}
+function nextPhoto(){slider.classList.remove("show");setTimeout(()=>{index=(index+1)%photos.length; slider.src=photos[index]; slider.classList.add("show");},500);}
+function prevPhoto(){slider.classList.remove("show");setTimeout(()=>{index=(index-1+photos.length)%photos.length; slider.src=photos[index]; slider.classList.add("show");},500);}
 
-  <script>
-    function moveNo() {
-      const noBtn = document.getElementById("no");
-      const x = Math.random() * 200 - 100;
-      const y = Math.random() * 200 - 100;
-      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+// Swipe support
+let startX=0;
+document.addEventListener("touchstart",e=>{startX=e.touches[0].clientX;});
+document.addEventListener("touchend",e=>{let endX=e.changedTouches[0].clientX;if(startX-endX>50){nextPhoto();}else if(endX-startX>50){prevPhoto();}});
+
+// Move NO button
+function moveNo(){
+  const noBtn=document.getElementById("no");
+  const x=Math.random()*200-100;
+  const y=Math.random()*200-100;
+  noBtn.style.transform=`translate(${x}px,${y}px)`;
+}
+
+// YES click
+function sayYes(){
+  document.getElementById("questionSection").style.display="none";
+  document.getElementById("loveSection").style.display="block";
+  startSlider();
+  showQuestion(0);
+}
+
+// Questions array
+const quiz = [
+  {q:"Tum kiske ho?", options:["Tumhari ❤️","Azeem Shaikh","Kya pata","Kis ki bhi nahi"], correct:0},
+  {q:"Azeem kon hai tumhara?", options:["Sab kuch 🎀","Bestfriend","Toy","Diwana"], correct:0},
+  {q:"Tum Azeem ko kitna piyar karte ho?", options:["Jaan se zyada 😘","Thoda sa 🥲","Nahi karti 😏","Kon Azeem 😂"], correct:0}
+];
+
+// Show questions
+let currentQ=0;
+function showQuestion(qIndex){
+  currentQ=qIndex;
+  const qDiv=document.getElementById("questions");
+  qDiv.innerHTML="";
+  const h=document.createElement("h2");
+  h.textContent=quiz[qIndex].q;
+  qDiv.appendChild(h);
+  quiz[qIndex].options.forEach((opt,i)=>{
+    const btn=document.createElement("button");
+    btn.textContent=opt;
+    btn.onclick=()=>checkAnswer(i);
+    qDiv.appendChild(btn);
+  });
+  qDiv.style.display="block";
+}
+
+// Check answer
+function checkAnswer(selected){
+  if(selected===quiz[currentQ].correct){
+    if(currentQ+1<quiz.length){
+      showQuestion(currentQ+1);
+    }else{
+      document.getElementById("questions").style.display="none";
+      celebrate();
     }
+  }else{
+    alert("Maar khaungi kamini 😂👊");
+  }
+}
 
-    function sayYes() {
-      document.getElementById("questionSection").style.display = "none";
-      document.getElementById("loveSection").style.display = "block";
-      document.getElementById("song").play();
-      createFlowers();
-    }
-
-    function createFlowers() {
-      for (let i = 0; i < 20; i++) {
-        const flower = document.createElement("div");
-        flower.className = "flower";
-        flower.innerHTML = "🌸";
-        flower.style.left = Math.random() * 100 + "vw";
-        flower.style.animationDuration = (Math.random() * 3 + 3) + "s";
-        document.body.appendChild(flower);
-
-        setTimeout(() => {
-          flower.remove();
-        }, 5000);
-      }
-    }
-  </script>
+// Celebration
+function celebrate(){
+  document.getElementById("celebration").style.display="block";
+  for(let i=0;i<100;i++){
+    const conf=document.createElement("div");
+    conf.className="confetti";
+    conf.style.left=Math.random()*100+"vw";
+    conf.style.background=["#fbc02d","#ff4081","#ff5252","#00bcd4"][Math.floor(Math.random()*4)];
+    conf.style.width=conf.style.height=Math.random()*10+5+"px";
+    document.body.appendChild(conf);
+    setTimeout(()=>conf.remove(),5000);
+  }
+}
+</script>
 
 </body>
 </html>
