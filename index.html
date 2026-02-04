@@ -7,7 +7,8 @@
 <style>
 body{
   margin:0; padding:0; font-family:Arial,sans-serif; text-align:center;
-  background: linear-gradient(to bottom,#ffdee9,#b5fffc); overflow-x:hidden; position:relative;
+  background: linear-gradient(to bottom,#ffdee9,#b5fffc);
+  overflow-x:hidden; position:relative;
 }
 .bg-layer{ position:fixed; top:0; left:0; width:100%; height:100%; background-repeat:no-repeat; background-size:cover; z-index:-2; }
 
@@ -62,19 +63,23 @@ Kya tum meri zindagi banogi?
 <audio id="song" src="song.mp3" preload="auto"></audio>
 <img id="photo" src="photo1.jpg" alt="Photo">
 <div id="questions"></div>
-<div id="celebration">🥳🎉 Congratulations! Tum mere bangaye baby ji  ❤️</div>
+<div id="celebration">🥳🎉 Congratulations! Tum mere ho ❤️</div>
 </div>
 
 <script>
+// Photos (11)
 const photos = ["photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg","photo5.jpg","photo6.jpg","photo7.jpg","photo8.jpg","photo9.jpg","photo10.jpg","photo11.jpg"];
 let currentQ=0;
-const quiz = [
-{q:"Tum kiske ho?", options:["Tumhari ❤️","jo leke gaya","Kya pata","Kis ki bhi nahi"], correct:0},
-{q:"Azeem kon hai tumhara?", options:["Sab kuch 🎀","Bestfriend","Toy","Diwana"], correct:0},
+
+// Quiz questions
+const quiz=[
+{q:"Tum kiske ho?", options:["Tumhari ❤️","jo le gaya","Kya pata","Kis ki bhi nahi"], correct:0},
+{q:"Azeem kon hai tumhara?", options:["Sab kuch 🎀","kuch nahi","Toy","Diwana"], correct:0},
 {q:"Tum Azeem ko kitna piyar karte ho?", options:["Jaan se zyada 😘","Thoda sa 🥲","Nahi karti 😏","Kon Azeem 😂"], correct:0},
 {q:"Tumhara favorite color?", options:["Pink 🌸","Blue 💙","Red ❤️","Green 💚"], correct:0}
 ];
 
+// Show question
 function showQuestion(qIndex){
 currentQ=qIndex;
 const qDiv=document.getElementById("questions");
@@ -86,13 +91,15 @@ let btn=document.createElement("button"); btn.textContent=opt; btn.onclick=()=>c
 qDiv.style.display="block"; fadePhoto(qIndex);
 }
 
+// Photo fade
 function fadePhoto(index){
 const photo=document.getElementById("photo"); const container=document.getElementById("loveSection");
 container.style.transform="translateY(0)"; photo.style.opacity=0;
-setTimeout(()=>{if(index<photos.length){photo.src=photos[index];} photo.style.opacity=1; container.style.transform="translateY(-5px)";
+setTimeout(()=>{ if(index<photos.length){ photo.src=photos[index]; } photo.style.opacity=1; container.style.transform="translateY(-5px)";
 setTimeout(()=>{container.style.transform="translateY(0)";},200);},500);
 }
 
+// Check answer
 function checkAnswer(selected,btn){
 if(selected===quiz[currentQ].correct){
 btn.classList.add("correct"); miniConfetti();
@@ -102,11 +109,13 @@ if(nextQ<quiz.length){ showQuestion(nextQ); } else{ document.getElementById("que
 }else{ btn.classList.add("wrong"); setTimeout(()=>btn.classList.remove("wrong"),500); alert("Maar khati kamini 👊"); }
 }
 
+// Extra photos after last question
 function showExtraPhotos(startIndex){
 let idx=startIndex; const photo=document.getElementById("photo");
-const interval=setInterval(()=>{ photo.style.opacity=0; setTimeout(()=>{ if(idx<photos.length){photo.src=photos[idx]; photo.style.opacity=1; idx++; } else { clearInterval(interval); } },500); },2500);
+const interval=setInterval(()=>{ photo.style.opacity=0; setTimeout(()=>{ if(idx<photos.length){ photo.src=photos[idx]; photo.style.opacity=1; idx++; } else { clearInterval(interval); } },500); },2500);
 }
 
+// Celebration
 function celebrate(){
 document.getElementById("celebration").style.display="block";
 setInterval(()=>{ const flower=document.createElement("div"); flower.className="falling-flower"; flower.style.left=Math.random()*100+"vw"; flower.style.animationDuration=5+Math.random()*2+"s"; flower.textContent="🌸"; document.body.appendChild(flower); setTimeout(()=>flower.remove(),7000); },300);
@@ -114,17 +123,16 @@ setInterval(()=>{ const heart=document.createElement("div"); heart.className="fl
 setInterval(()=>{ const sparkle=document.createElement("div"); sparkle.className="sparkle"; sparkle.style.left=Math.random()*100+"vw"; sparkle.style.top=Math.random()*100+"vh"; sparkle.textContent="✨"; document.body.appendChild(sparkle); setTimeout(()=>sparkle.remove(),2000); },300);
 }
 
-function miniConfetti(){
-for(let i=0;i<20;i++){
-let conf=document.createElement("div"); conf.className="sparkle"; conf.textContent="🎉"; conf.style.left=Math.random()*100+"vw"; conf.style.top=Math.random()*100+"vh"; conf.style.fontSize=15+Math.random()*15+"px";
-document.body.appendChild(conf); setTimeout(()=>conf.remove(),2000);
-}
-}
+// Mini confetti
+function miniConfetti(){ for(let i=0;i<20;i++){ let conf=document.createElement("div"); conf.className="sparkle"; conf.textContent="🎉"; conf.style.left=Math.random()*100+"vw"; conf.style.top=Math.random()*100+"vh"; conf.style.fontSize=15+Math.random()*15+"px"; document.body.appendChild(conf); setTimeout(()=>conf.remove(),2000); } }
 
+// Move NO
 function moveNo(){ const noBtn=document.getElementById("no"); const x=Math.random()*200-100; const y=Math.random()*200-100; noBtn.style.transform=`translate(${x}px,${y}px)`; }
 
+// YES click
 function sayYes(){ document.getElementById("questionSection").style.display="none"; document.getElementById("loveSection").style.display="block"; const song=document.getElementById("song"); song.loop=true; song.volume=0.6; song.play(); showQuestion(0); }
 
+// Swipe support
 let startX=0; document.addEventListener("touchstart",e=>{startX=e.touches[0].clientX;});
 document.addEventListener("touchend",e=>{ let endX=e.changedTouches[0].clientX; if(startX-endX>50){ nextPhoto(); } else if(endX-startX>50){ prevPhoto(); } });
 function nextPhoto(){ let next=(currentQ+1<photos.length)?currentQ+1:0; fadePhoto(next);}
