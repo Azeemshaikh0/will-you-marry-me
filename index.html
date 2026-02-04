@@ -3,38 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Proposal for Ziyu ❤️</title>
+    <title>For Ziyu ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
-        :root { --primary-pink: #ff4d6d; --soft-pink: #ff8fa3; --glass: rgba(255, 255, 255, 0.25); --glass-border: rgba(255, 255, 255, 0.5); }
+        :root { --primary-pink: #ff4d6d; --glass: rgba(255, 255, 255, 0.25); --glass-border: rgba(255, 255, 255, 0.5); }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { margin: 0; padding: 0; min-height: 100vh; width: 100vw; background: linear-gradient(-45deg, #ffe0f0, #f0dfff, #e0f0ff, #fff0e0); background-size: 400% 400%; animation: gradientBG 15s ease infinite; display: flex; justify-content: center; align-items: center; font-family: 'Poppins', sans-serif; overflow-x: hidden; overflow-y: auto; transition: opacity 2s ease; }
+        body { margin: 0; padding: 0; min-height: 100vh; width: 100vw; background: linear-gradient(-45deg, #ffe0f0, #f0dfff, #e0f0ff, #fff0e0); background-size: 400% 400%; animation: gradientBG 15s ease infinite; display: flex; justify-content: center; align-items: center; font-family: 'Poppins', sans-serif; overflow-x: hidden; transition: opacity 2s ease; }
         @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .container { position: relative; z-index: 10; padding: 20px; width: 92%; max-width: 420px; background: var(--glass); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-radius: 30px; border: 1px solid var(--glass-border); box-shadow: 0 15px 35px rgba(0,0,0,0.1); text-align: center; margin: 20px auto; animation: fadeIn 1s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        h1 { font-family: 'Dancing Script', cursive; color: #d6336c; font-size: 2.5rem; margin: 0 0 10px 0; }
-        p { font-family: 'Pacifico', cursive; color: #444; font-size: 1rem; line-height: 1.4; }
-        .photo-container { width: 80%; aspect-ratio: 9/16; margin: 15px auto; border-radius: 20px; overflow: hidden; border: 4px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.15); background: #fff; }
-        #photo { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.6s ease; }
+        .container { position: relative; z-index: 10; padding: 20px; width: 92%; max-width: 420px; background: var(--glass); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-radius: 30px; border: 1px solid var(--glass-border); box-shadow: 0 15px 35px rgba(0,0,0,0.1); text-align: center; margin: 20px auto; }
+        .photo-container { width: 85%; aspect-ratio: 9/16; margin: 15px auto; border-radius: 20px; overflow: hidden; border: 4px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.15); background: #000; position: relative; }
+        #photo { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.8s ease; }
+        .zoom-active { animation: slowZoom 4.5s linear forwards; }
+        @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.18); } }
+        h1 { font-family: 'Dancing Script', cursive; color: #d6336c; font-size: 2.5rem; margin: 0; }
+        .main-p { font-family: 'Pacifico', cursive; color: #444; font-size: 1.1rem; line-height: 1.5; margin: 15px 0; }
         .btn-wrapper { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
         button { padding: 12px 25px; font-size: 1rem; font-weight: 600; border: none; border-radius: 50px; cursor: pointer; transition: 0.3s; }
-        #yes { background: var(--primary-pink); color: white; }
+        #yes { background: var(--primary-pink); color: white; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4); }
         #no { background: white; color: var(--primary-pink); position: relative; }
-        .quiz-btn { display: block; width: 100%; margin: 10px 0; background: white; color: #333; }
+        .quiz-btn { display: block; width: 100%; margin: 10px 0; background: white; color: #333; border-radius: 15px; padding: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); }
         .correct { background: #2ed573 !important; color: white; }
         .wrong { background: #ff4757 !important; color: white; animation: shake 0.4s; }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
-        #heartPop { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); font-size: 100px; z-index: 1000; transition: 0.5s; pointer-events: none; opacity: 0; }
-        #heartPop.show { transform: translate(-50%, -50%) scale(1.5); opacity: 1; }
-        #cornerNazar { position: fixed; top: 20px; right: 20px; font-size: 2rem; z-index: 1000; display: none; }
-        #congratsText { display: none; font-family: 'Dancing Script', cursive; color: #d6336c; font-size: 1.6rem; }
-        #statusText { font-family:'Pacifico'; color:#d6336c; margin-top:10px; font-size: 1.3rem; }
-        #finalNazar { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 120px; z-index: 10001; opacity: 0; transition: opacity 2s ease-in; display: none; }
-        #toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,50,100,0.9); color: white; padding: 20px; border-radius: 20px; opacity: 0; transition: 0.4s; z-index: 10000; }
-        #toast.show { opacity: 1; }
-        .decoration { position: fixed; pointer-events: none; animation: fall linear forwards; }
+        .decoration { position: fixed; pointer-events: none; z-index: 9999; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        #heartPop { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); font-size: 100px; z-index: 10000; transition: 0.5s; opacity: 0; }
+        #heartPop.show { transform: translate(-50%, -50%) scale(1.5); opacity: 1; }
+        #cornerNazar { position: fixed; top: 20px; right: 20px; font-size: 2rem; z-index: 10000; display: none; }
+        #congratsText { display: none; font-family: 'Dancing Script', cursive; color: #d6336c; font-size: 1.6rem; margin-top: 10px; }
+        #statusText { font-family:'Pacifico'; color:#d6336c; margin-top:10px; font-size: 1.3rem; }
+        #finalNazar { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 120px; z-index: 100001; opacity: 0; transition: opacity 2s ease-in; display: none; }
+        #toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,50,100,0.9); color: white; padding: 20px; border-radius: 20px; opacity: 0; transition: 0.4s; z-index: 100000; pointer-events: none; }
+        #toast.show { opacity: 1; }
         #endVideo { width: 100%; aspect-ratio: 9/16; border-radius: 15px; display: none; object-fit: cover; }
     </style>
 </head>
@@ -42,7 +43,7 @@
     <div id="cornerNazar">🧿</div>
     <div class="container" id="introBox">
         <h1>Hello Ziyu ❤️</h1>
-        <p>Tum mere ho<br>Mai tumhare bina ek pal bhi nahi rahe sakta<br>Will you marry me Ziyu!</p>
+        <p class="main-p">Tum meri ho mai<br>tumhare bina ek pal bhi nahi rahe sakta<br>Tum meri duniya hi<br>Will you marry me ziyu !</p>
         <div class="btn-wrapper"><button id="yes" onclick="startApp()">YES 💍</button><button id="no" onmouseover="moveNo()" onclick="moveNo()">NO 😅</button></div>
     </div>
     <div class="container" id="mainBox" style="display:none;">
@@ -54,7 +55,7 @@
         <div id="statusText" style="display:none;">🧿 Hamesha ke liye...</div>
     </div>
     <div id="heartPop">💕</div><div id="finalNazar">🧿</div><div id="toast">Maar khati kamini 👊</div>
-    <script>
+        <script>
         const photos = ["photo1.jpg", "photo2.jpg", "photo3.jpg", "photo4.jpg", "photo5.jpg", "photo6.jpg", "photo7.jpg", "photo8.jpg", "photo9.jpg", "photo10.jpg", "photo11.jpg", "photo12.jpg", "photo13.jpg", "photo14.jpg", "photo15.jpg"];
         const questions = [
             { q: "Tum kiske ho?", a: ["Tumhari ❤️", "Jo le gaya", "Kya pata", "Kis ki bhi nahi"], c: "Tumhari ❤️" },
@@ -64,10 +65,10 @@
         ];
         let qStep = 0;
         function moveNo() { const b = document.getElementById("no"); b.style.position = 'fixed'; b.style.left = Math.random() * (window.innerWidth - 100) + 'px'; b.style.top = Math.random() * (window.innerHeight - 50) + 'px'; }
-        function startApp() { document.getElementById("introBox").style.display = "none"; document.getElementById("mainBox").style.display = "block"; document.getElementById("mainAudio").play(); renderQuiz(0); }
+        function startApp() { document.getElementById("introBox").style.display = "none"; document.getElementById("mainBox").style.display = "block"; document.getElementById("mainAudio").play().catch(() => {}); renderQuiz(0); }
         function renderQuiz(idx) {
             qStep = idx; const container = document.getElementById("quizContainer");
-            container.innerHTML = `<h2 style="font-family:'Dancing Script'; color:#333;">${questions[idx].q}</h2>`;
+            container.innerHTML = `<h2 style="font-family:'Dancing Script'; margin-bottom:15px;">${questions[idx].q}</h2>`;
             let shuffled = [...questions[idx].a].sort(() => Math.random() - 0.5);
             shuffled.forEach((opt) => {
                 const btn = document.createElement("button"); btn.className = "quiz-btn"; btn.innerText = opt;
@@ -75,12 +76,15 @@
             });
             changePhoto(idx); window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        function changePhoto(idx) { const img = document.getElementById("photo"); img.style.opacity = 0; setTimeout(() => { if(photos[idx]) img.src = photos[idx]; img.style.opacity = 1; }, 400); }
+        function changePhoto(idx) {
+            const img = document.getElementById("photo"); img.style.opacity = 0; img.classList.remove("zoom-active");
+            setTimeout(() => { if(photos[idx]) img.src = photos[idx]; img.style.opacity = 1; img.classList.add("zoom-active"); }, 400);
+        }
         function checkAnswer(selected, btn) {
             if(selected === questions[qStep].c) {
                 btn.classList.add("correct"); document.getElementById("heartPop").classList.add("show");
                 setTimeout(() => { document.getElementById("heartPop").classList.remove("show"); if(qStep + 1 < questions.length) renderQuiz(qStep + 1); else startShow(); }, 1000);
-            } else { btn.classList.add("wrong"); document.getElementById("toast").classList.add("show"); setTimeout(() => document.getElementById("toast").classList.remove("show"), 2000); }
+            } else { btn.classList.add("wrong"); const t = document.getElementById("toast"); t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 2000); }
         }
         function startShow() {
             document.getElementById("quizContainer").style.display = "none"; document.getElementById("congratsText").style.display = "block"; document.getElementById("cornerNazar").style.display = "block";
@@ -92,9 +96,12 @@
             const v = document.getElementById("endVideo"); v.style.display = "block"; v.play();
             v.onended = () => { document.getElementById("cornerNazar").style.display = "none"; const fn = document.getElementById("finalNazar"); fn.style.display = "block"; setTimeout(() => fn.style.opacity = "1", 100); setTimeout(() => document.body.style.opacity = "0", 4000); };
         }
-        function startDecorations() { setInterval(() => { const d = document.createElement("div"); d.className = "decoration"; d.innerText = ["🌸", "💖", "✨", "💕"][Math.floor(Math.random()*4)]; d.style.left = Math.random() * 100 + "vw"; d.style.fontSize = Math.random() * 20 + 10 + "px"; d.style.animationDuration = Math.random() * 3 + 4 + "s"; document.body.appendChild(d); setTimeout(() => d.remove(), 6000); }, 300); }
+        function startDecorations() {
+            setInterval(() => {
+                const d = document.createElement("div"); d.className = "decoration"; d.innerText = ["🌸", "💖", "✨", "💕"][Math.floor(Math.random()*4)]; d.style.left = Math.random() * 100 + "vw"; d.style.top = "-5vh"; d.style.fontSize = Math.random() * 20 + 15 + "px"; d.style.animationDuration = Math.random() * 3 + 4 + "s";
+                document.body.appendChild(d); setTimeout(() => d.remove(), 6000);
+            }, 300);
+        }
     </script>
 </body>
 </html>
-
-
