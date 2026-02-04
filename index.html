@@ -3,137 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For My Ziyu ❤️</title>
+    <title>Proposal for Ziyu ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary: #ff4d6d;
-            --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            --primary-pink: #ff4d6d;
+            --soft-pink: #ff8fa3;
+            --glass: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.5);
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
-            margin: 0; padding: 0; min-height: 100vh;
-            background: var(--bg-gradient);
+            margin: 0; padding: 0; height: 100vh; width: 100vw;
+            background: linear-gradient(-45deg, #ffe0f0, #f0dfff, #e0f0ff, #fff0e0);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             display: flex; justify-content: center; align-items: center;
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-            transition: opacity 1.5s ease;
+            font-family: 'Poppins', sans-serif; overflow: hidden;
+            transition: opacity 2s ease;
         }
 
-        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
         .container {
-            position: relative; z-index: 10; padding: 25px; width: 90%; max-width: 400px;
-            background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(15px);
-            border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1); text-align: center;
+            position: relative; z-index: 10; padding: 25px; width: 90%; max-width: 420px;
+            background: var(--glass); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border-radius: 30px; border: 1px solid var(--glass-border);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); text-align: center;
+            animation: fadeIn 1s ease-out;
         }
 
-        h1 { font-family: 'Dancing Script', cursive; color: #d6336c; font-size: 2.5rem; }
-        p { font-family: 'Pacifico', cursive; color: #444; font-size: 1rem; }
-
-        /* Photo Frame 9:16 */
-        #photo-frame {
-            width: 100%; aspect-ratio: 9/16; position: relative;
-            overflow: hidden; border-radius: 15px; margin-bottom: 20px;
-            border: 4px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
 
-        #photo {
-            width: 100%; height: 100%; object-fit: cover;
-            opacity: 1; transition: opacity 0.8s ease-in-out;
+        h1 { font-family: 'Dancing Script', cursive; color: #d6336c; font-size: 2.8rem; margin: 0 0 10px 0; }
+        p { font-family: 'Pacifico', cursive; color: #444; font-size: 1.1rem; line-height: 1.5; }
+
+        .photo-container {
+            width: 100%; aspect-ratio: 9/16; margin: 20px auto;
+            border-radius: 20px; overflow: hidden; border: 5px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15); background: #fff;
         }
+
+        #photo { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.8s ease-in-out; }
+
+        .btn-wrapper { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
 
         button {
-            padding: 12px 30px; border: none; border-radius: 50px;
-            cursor: pointer; font-weight: 600; transition: 0.3s;
-            margin: 10px; font-family: 'Poppins';
+            padding: 12px 30px; font-size: 1rem; font-weight: 600; border: none;
+            border-radius: 50px; cursor: pointer; font-family: 'Poppins';
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.27);
         }
 
-        #yes { background: #ff4d6d; color: white; }
-        #no { background: white; color: #ff4d6d; position: relative; }
+        #yes { background: var(--primary-pink); color: white; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4); }
+        #no { background: white; color: var(--primary-pink); position: relative; }
+
+        .quiz-btn { display: block; width: 100%; margin: 10px 0; background: white; color: #333; }
+        .correct { background: #2ed573 !important; color: white; }
+        .wrong { background: #ff4757 !important; color: white; animation: shake 0.4s; }
+
+        #heartPop {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+            font-size: 100px; z-index: 1000; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.27);
+            pointer-events: none; opacity: 0;
+        }
+        #heartPop.show { transform: translate(-50%, -50%) scale(1.5); opacity: 1; }
+
+        #congratsText {
+            display: none; font-family: 'Dancing Script', cursive; 
+            color: #d6336c; font-size: 1.8rem; margin-top: 15px;
+        }
+
+        #statusText { font-family:'Pacifico'; color:#d6336c; margin-top:10px; font-size:1.5rem; }
+
+        /* Bada Nazar Animation */
+        #finalNazar {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 120px; z-index: 10001; opacity: 0;
+            transition: opacity 2s ease-in; pointer-events: none; display: none;
+        }
 
         #toast {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8);
-            background: rgba(255, 71, 87, 0.95); color: white; padding: 25px 40px;
-            border-radius: 20px; z-index: 10000; opacity: 0; pointer-events: none;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.27);
-            font-size: 1.5rem; font-weight: bold; text-align: center;
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.7);
+            background: rgba(255, 50, 100, 0.95); color: white; padding: 25px 50px;
+            border-radius: 25px; font-size: 1.6rem; font-weight: bold; z-index: 10000;
+            opacity: 0; transition: 0.4s; pointer-events: none;
         }
         #toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 
-        #questions button { display: block; width: 100%; margin: 10px 0; background: white; }
-        #questions button.correct { background: #2ed573; color: white; }
-        #questions button.wrong { background: #ff4757; color: white; animation: shake 0.4s; }
+        .decoration { position: fixed; pointer-events: none; z-index: 999; animation: fall linear forwards; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
-
-        video { width: 100%; border-radius: 15px; display: none; aspect-ratio: 9/16; object-fit: cover; }
-        #nazar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 3rem; display: none; }
+        #endVideo { width: 100%; aspect-ratio: 9/16; border-radius: 15px; display: none; object-fit: cover; }
     </style>
 </head>
 <body>
 
-    <div class="container" id="questionSection">
+    <div class="container" id="introBox">
         <h1>Hello Ziyu ❤️</h1>
-        <p>Tum mere ho... Will you marry me Ziyu!</p>
-        <button id="yes" onclick="sayYes()">YES 💍</button>
-        <button id="no" onmouseover="moveNo()" onclick="moveNo()">NO 😅</button>
+        <p>Tum mere ho<br>Mai tumhare bina ek pal bhi nahi rahe sakta<br>Tum Mera sab kuch ho<br>Will you marry me Ziyu!</p>
+        <div class="btn-wrapper">
+            <button id="yes" onclick="startApp()">YES 💍</button>
+            <button id="no" onmouseover="moveNo()" onclick="moveNo()">NO 😅</button>
+        </div>
     </div>
 
-    <div class="container" id="loveSection" style="display:none;">
-        <audio id="song" src="song.mp3" loop></audio>
-        <div id="photo-frame"><img id="photo" src="photo1.jpg"></div>
-        <div id="questions"></div>
+    <div class="container" id="mainBox" style="display:none;">
+        <audio id="mainAudio" src="song.mp3" loop></audio>
+        <div class="photo-container">
+            <img id="photo" src="photo1.jpg" alt="Our Moments">
+        </div>
+        <div id="quizContainer"></div>
+        
+        <div id="congratsText">Congratulations! 🥳<br>Tum mere ho baby ji 💕</div>
+        
         <video id="endVideo" playsinline><source src="video.mp4" type="video/mp4"></video>
-        <div id="celebration" style="display:none; font-family:'Pacifico'; color:#d6336c; margin-top:10px;">🥳 Tum mere ho baby ji 💕</div>
+        <div id="statusText" style="display:none;">🧿 Hamesha ke liye...</div>
     </div>
 
+    <div id="heartPop">💕</div>
+    <div id="finalNazar">🧿</div>
     <div id="toast">Maar khati kamini 👊</div>
-    <div id="nazar">🧿</div>
 
     <script>
         const photos = ["photo1.jpg", "photo2.jpg", "photo3.jpg", "photo4.jpg", "photo5.jpg", "photo6.jpg", "photo7.jpg", "photo8.jpg", "photo9.jpg", "photo10.jpg", "photo11.jpg"];
-        const quizData = [
-            { q: "Tum kiske ho?", options: ["Tumhari ❤️", "Jo le gaya", "Kya pata", "Kis ki bhi nahi"], correct: 0 },
-            { q: "Azeem kon hai tumhara?", options: ["Sab kuch 💕", "kuch b nahi", "Toy", "Diwana"], correct: 0 },
-            { q: "Tum Azeem ko kitna piyar karte ho?", options: ["Jaan se zyada 😘", "Thoda sa 🥲", "Nahi karti 😏", "Kon Azeem 😂"], correct: 0 }
+        const questions = [
+            { q: "Tum kiske ho?", a: ["Tumhari ❤️", "Jo le gaya", "Kya pata", "Kis ki bhi nahi"], c: 0 },
+            { q: "Azeem kon hai tumhara?", a: ["Sab kuch 💕", "kuch b nahi", "Toy", "Diwana"], c: 0 },
+            { q: "Tum Azeem ko kitna piyar karte ho?", a: ["Jaan se zyada 😘", "Thoda sa 🥲", "Nahi karti 😏", "Kon Azeem 😂"], c: 0 },
+            { q: "Tumhara favorite color?", a: ["White 🤍", "Blue 💙", "Red ❤️", "Green 💚"], c: 0 }
         ];
 
-        let currentQ = 0;
+        let qStep = 0;
 
         function moveNo() {
-            const btn = document.getElementById("no");
-            btn.style.position = 'fixed';
-            btn.style.left = Math.random() * (window.innerWidth - 100) + 'px';
-            btn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+            const b = document.getElementById("no");
+            b.style.position = 'fixed';
+            b.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+            b.style.top = Math.random() * (window.innerHeight - 50) + 'px';
         }
 
-        function sayYes() {
-            document.getElementById("questionSection").style.display = "none";
-            document.getElementById("loveSection").style.display = "block";
-            document.getElementById("song").play();
-            loadQuiz(0);
+        function startApp() {
+            document.getElementById("introBox").style.display = "none";
+            document.getElementById("mainBox").style.display = "block";
+            const audio = document.getElementById("mainAudio");
+            audio.volume = 0.5;
+            audio.play();
+            renderQuiz(0);
         }
 
-        function loadQuiz(idx) {
-            currentQ = idx;
-            const qDiv = document.getElementById("questions");
-            qDiv.innerHTML = `<h2>${quizData[idx].q}</h2>`;
-            quizData[idx].options.forEach((opt, i) => {
-                const b = document.createElement("button");
-                b.innerText = opt;
-                b.onclick = () => checkAns(i, b);
-                qDiv.appendChild(b);
+        function renderQuiz(idx) {
+            qStep = idx;
+            const container = document.getElementById("quizContainer");
+            container.innerHTML = `<h2 style="font-family:'Dancing Script'; color:#333;">${questions[idx].q}</h2>`;
+            
+            questions[idx].a.forEach((opt, i) => {
+                const btn = document.createElement("button");
+                btn.className = "quiz-btn";
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(i, btn);
+                container.appendChild(btn);
             });
-            updatePhoto(idx);
+            changePhoto(idx);
         }
 
-        function updatePhoto(idx) {
+        function changePhoto(idx) {
             const img = document.getElementById("photo");
             img.style.opacity = 0;
             setTimeout(() => {
@@ -142,48 +185,76 @@
             }, 400);
         }
 
-        function checkAns(i, btn) {
-            if(i === quizData[currentQ].correct) {
+        function checkAnswer(i, btn) {
+            if(i === questions[qStep].c) {
                 btn.classList.add("correct");
+                const heart = document.getElementById("heartPop");
+                heart.classList.add("show");
+                setTimeout(() => heart.classList.remove("show"), 800);
+
                 setTimeout(() => {
-                    if(currentQ + 1 < quizData.length) loadQuiz(currentQ + 1);
-                    else startFinal();
-                }, 800);
+                    if(qStep + 1 < questions.length) renderQuiz(qStep + 1);
+                    else startShow();
+                }, 1000);
             } else {
                 btn.classList.add("wrong");
-                if(navigator.vibrate) navigator.vibrate(200);
                 const t = document.getElementById("toast");
                 t.classList.add("show");
                 setTimeout(() => t.classList.remove("show"), 2000);
             }
         }
 
-        function startFinal() {
-            document.getElementById("questions").style.display = "none";
-            let pIdx = quizData.length;
-            const interval = setInterval(() => {
+        function startShow() {
+            document.getElementById("quizContainer").style.display = "none";
+            document.getElementById("congratsText").style.display = "block";
+            startDecorations(); 
+            
+            let pIdx = questions.length;
+            const timer = setInterval(() => {
                 if(pIdx < photos.length) {
-                    updatePhoto(pIdx);
+                    changePhoto(pIdx);
                     pIdx++;
                 } else {
-                    clearInterval(interval);
-                    showEnd();
+                    clearInterval(timer);
+                    playVideo();
                 }
-            }, 2000);
+            }, 2500);
         }
 
-        function showEnd() {
-            document.getElementById("photo-frame").style.display = "none";
-            document.getElementById("celebration").style.display = "block";
+        function playVideo() {
+            document.querySelector(".photo-container").style.display = "none";
+            document.getElementById("congratsText").style.display = "none";
+            document.getElementById("statusText").style.display = "block";
             const v = document.getElementById("endVideo");
             v.style.display = "block";
-            document.getElementById("nazar").style.display = "block";
             v.play();
-            
+
+            // Jab video khatam hone wali ho
             v.onended = () => {
-                document.getElementById("song").pause();
-                document.body.style.opacity = "0";
+                const finalNazar = document.getElementById("finalNazar");
+                finalNazar.style.display = "block";
+                setTimeout(() => {
+                    finalNazar.style.opacity = "1";
+                }, 100);
+                
+                // Screen fade out after nazar appears
+                setTimeout(() => {
+                    document.body.style.opacity = "0";
+                }, 4000);
             };
+        }
+
+        function startDecorations() {
+            setInterval(() => {
+                const d = document.createElement("div");
+                d.className = "decoration";
+                d.innerText = ["🌸", "💖", "✨", "💕"][Math.floor(Math.random()*4)];
+                d.style.left = Math.random() * 100 + "vw";
+                d.style.fontSize = Math.random() * 20 + 10 + "px";
+                d.style.animationDuration = Math.random() * 3 + 4 + "s";
+                document.body.appendChild(d);
+                setTimeout(() => d.remove(), 6000);
+            }, 300);
         }
     </script>
 </body>
